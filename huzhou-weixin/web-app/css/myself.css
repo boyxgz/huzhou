@@ -1,0 +1,27 @@
+.box{
+	border-top:4px solid rgba(125, 211, 212, 0.47);
+	background-color:#fff;
+	margin-top:15px;
+	padding:15px;
+}
+thead{
+	background-color:rgb(58, 181, 169);
+	font-weight:bold;
+}
+tbody{
+	background-color:#fff;
+}
+.table{
+	position:relative;
+	top:10px;
+}
+
+.text-content{
+	font-weight:bold;
+	padding-top:15px;
+}
+
+.left-offset{
+	margin-top:15px;
+	margin-left:25%;
+}

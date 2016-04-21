@@ -18,17 +18,19 @@ class Event2016EarlySummberController {
 	 * 自动登录
 	 */
 	def beforeInterceptor = {
-		def userSn = request.getCookie('subscriber-sn')
 		
-		subscriber = SubscriberCookie.subscriberSn(userSn)?.subscriber
-		if(!subscriber) {
-			def requestUrl = request.forwardURI
-			def baseUrl = Holders.config.grails.serverURL
-			def url = Auth2Util.buildRedirectUrl("${baseUrl}/autoLogin/login", requestUrl, AuthScope.BASE)
-			response.deleteCookie('subscriber-sn')
-			redirect(url:url)
-			return false
-		}
+		subscriber = Subscriber.get(1)
+//		def userSn = request.getCookie('subscriber-sn')
+//		
+//		subscriber = SubscriberCookie.subscriberSn(userSn)?.subscriber
+//		if(!subscriber) {
+//			def requestUrl = request.forwardURI
+//			def baseUrl = Holders.config.grails.serverURL
+//			def url = Auth2Util.buildRedirectUrl("${baseUrl}/autoLogin/login", requestUrl, AuthScope.BASE)
+//			response.deleteCookie('subscriber-sn')
+//			redirect(url:url)
+//			return false
+//		}
 		return true
 	}
 
@@ -53,7 +55,8 @@ class Event2016EarlySummberController {
 	 * @return
 	 */
 	def dashboard() {
-		
+		def isDrawingSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
+		[isDrawingSub:isDrawingSub]
 	}
 	
 	/**
