@@ -8,6 +8,10 @@ class Prize2016EarlySummber {
 	
 	String name
 	Float amount
-	Boolean valuable
+
+	/**
+	 * 其实是没有中奖
+	 */
+	Boolean valuable = false
 	String description
 }

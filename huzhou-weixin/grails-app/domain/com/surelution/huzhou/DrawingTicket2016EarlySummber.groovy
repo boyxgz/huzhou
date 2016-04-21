@@ -4,6 +4,7 @@ class DrawingTicket2016EarlySummber {
 
     static constraints = {
 		winningSn nullable:true
+		prize nullable:true
     }
 	
 	Subscriber subscriber
@@ -11,5 +12,9 @@ class DrawingTicket2016EarlySummber {
 	Date drawAt
 	Prize2016EarlySummber prize
 	String winningSn
+	
+	/**
+	 * 是否已兑奖
+	 */
 	Boolean rewarded = false
 }
