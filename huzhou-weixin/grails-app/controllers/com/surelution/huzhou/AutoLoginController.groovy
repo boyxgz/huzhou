@@ -17,4 +17,5 @@ class AutoLoginController {
 		response.setCookie('subscriber-sn', sc.subscriberSn)
 		redirect(url:"http://${Holders.config.grails.serverURL}${state}")
 	}
+	
 }
