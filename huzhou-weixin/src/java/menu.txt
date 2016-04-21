@@ -1,0 +1,47 @@
+{
+    "button": [
+        
+        {
+            "name": "挂号预约",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "在线挂号",
+                    "url": "http://qiushengming.sh-hansi.com/introDoctor/introDoctor"
+                },
+                {
+                    "type": "view",
+                    "name": "个人中心",
+                    "url": "http://qiushengming.sh-hansi.com/patientPortal/personalCenter"
+                },
+                {
+                    "type": "view",
+                    "name": "预约指南",
+                    "url": "http://yijuan.sh-hansi.com/patientPortal/handbook"
+                }
+            ]
+        },
+        
+        {
+            "name": "医生选择",
+            "type":"view",
+            "url":"http://qiushengming.sh-hansi.com/patientPortal/selectDoctor"
+          },
+          
+          {
+            "name": "关于我们",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "科室简介",
+                    "url": "http://qiushengming.sh-hansi.com/introDepartment/introdeDartment"
+                },
+                {
+                    "type": "view",
+                    "name": "联系我们",
+                    "url": "http://qiushengming.sh-hansi.com/contact/contact"
+                }
+            ]
+        }      
+    ]
+}

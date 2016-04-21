@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<wx>
+	<token>whistle</token>
+	<appid>wx5cb93b6a00b74763</appid>
+	<secret>52d9758a8c9655994da6f88e195f70b9</secret>
+	<checkRequestRestrictly>true</checkRequestRestrictly>
+	<processor-chain>
+		<processor>com.surelution.ruijin.PatientSendingMessageAction</processor>
+		<processor>com.surelution.ruijin.FollowDoctorAction</processor>
+	    <processor>com.surelution.ruijin.TempQrScannedAction</processor>
+	    <processor>com.surelution.ruijin.UnSubscribeAction</processor>
+	    <processor>com.surelution.ruijin.FollowWxAction</processor>
+	    <processor>com.surelution.ruijin.ErrorMessageAction</processor>
+	    <processor>com.surelution.ruijin.UnFollowDoctorAction</processor>
+		<processor>com.surelution.whistle.core.SampleAction</processor>
+	</processor-chain>
+</wx>
