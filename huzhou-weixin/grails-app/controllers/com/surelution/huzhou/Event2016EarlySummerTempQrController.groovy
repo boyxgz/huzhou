@@ -25,11 +25,14 @@ class Event2016EarlySummerTempQrController {
 		println qrs
 		qrs.each {qr->
 			def is = QrCode.getTempQr(qr.qrKey, A_MONTH_SECOND)
-			def content = QrCode.decodeQr(is)
-			def fos = new FileOutputStream("${Holders.config.qrFile.path}/${qr}.jpg")
+			def filePath = "${Holders.config.qrFile.path}/${qr.qrKey}.jpg"
+			def fos = new FileOutputStream(filePath)
 			fos << is
 			fos.flush()
 			fos.close()
+			//the inputstream from web does'nt support mark, 
+			//so read the stream again from file system
+			def content = QrCode.decodeQr(new FileInputStream(filePath))
 			qr.content = content
 			qr.save()
 		}
