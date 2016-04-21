@@ -2,7 +2,7 @@ package com.surelution.huzhou
 
 import grails.util.Holders
 /**
- *  
+ *   
  */
 
 import com.surelution.whistle.core.Auth2Util
