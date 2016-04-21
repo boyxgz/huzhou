@@ -14,6 +14,7 @@
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
+grails.app.context = "/"
 grails.mime.types = [
     all:           '*/*',
     atom:          'application/atom+xml',
@@ -63,12 +64,14 @@ environments {
     development {
         grails.logging.jul.usebridge = true
 		grails.serverURL = "http://huzhou.sh-hansi.com"
-		grails.dynImage.rootPath="/Users/johnny/huzhou_pic"
+		dynImage.rootPath="/Users/johnny/huzhou_pic"
+		qrFile.path = "/Users/johnny/temp_qr"
     }
     production {
         grails.logging.jul.usebridge = false
         grails.serverURL = "http://huzhou.sh-hansi.com"
-		grails.dynImage.rootPath = "/home/huzhou-pics"
+		dynImage.rootPath = "/home/huzhou-pics"
+		qrFile.path = "/Users/johnny/temp_qr"
     }
 }
 
@@ -93,10 +96,10 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.surelution.ruijin.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.surelution.ruijin.UserRole'
-grails.plugin.springsecurity.authority.className = 'com.surelution.ruijin.Role'
-grails.plugin.springsecurity.requestMap.className = 'com.surelution.ruijin.Requerst'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.surelution.huzhou.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.surelution.huzhou.UserRole'
+grails.plugin.springsecurity.authority.className = 'com.surelution.huzhou.Role'
+grails.plugin.springsecurity.requestMap.className = 'com.surelution.huzhou.Requestmap'
 grails.plugin.springsecurity.securityConfigType = 'Requestmap'
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
