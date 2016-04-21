@@ -9,6 +9,10 @@ import com.surelution.whistle.core.Auth2Util
 
 class AutoLoginController {
 
+	/**
+	 * logging
+	 * @return
+	 */
 	def login() {
 		def code = params.code
 		def state = params.state
