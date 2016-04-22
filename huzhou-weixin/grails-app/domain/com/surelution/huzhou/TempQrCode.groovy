@@ -26,6 +26,8 @@ class TempQrCode {
 
     static constraints = {
 		qrKey nullable:true
+		content nullable:true
+		expiredAt nullable:true
     }
 
 	static mapping = {
@@ -44,7 +46,11 @@ class TempQrCode {
 	}
 
 	String qrKey
-
+	/**
+	 * 二维码内容
+	 */
+	String content
+	
 	Date dateCreated
 	
 	Date expiredAt
