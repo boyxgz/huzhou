@@ -103,10 +103,16 @@ class Event2016EarlySummberController {
 			drawing = DrawingTicketScanningQr2016EarlySummber.list()[0]
 		}
 		
+		/**
+		 * @return 抽奖的机会
+		 */
+		def ticketNum = DrawingTicket2016EarlySummber.findAllByIsUse(false).size()
+		
 		def lastDrawing = DrawingTicket2016EarlySummber.createCriteria().list{
 			eq("subscriber",subscriber)
 			order("dateCreated","desc")
 		}
+		
 		Date lastDrawingDate
 		Boolean isToday
 		if(lastDrawing){
@@ -123,12 +129,13 @@ class Event2016EarlySummberController {
 		
 		println isToday
 		
-		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,drawing:drawing]
+		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,drawing:drawing,ticketNum:ticketNum]
 	}
 	
 	def useTicket(long id){
 		def drawing = DrawingTicket2016EarlySummber.get(id)
-		drawing.isUse == true
+		println 111111
+		drawing.isUse = true
 		drawing.save(flush:true)
 	}
 	/**

@@ -38,7 +38,6 @@ class TempQrScannedAction extends HuzhouBaseAction {
 				if(drawSub.prize.valuable == false){
 					drawSub.winningSn = null
 				}
-				put(new Attribute(Attribute.KEY_Content, drawSub.save(flush:true)))
 				drawSub.save(flush:true)
 			}
 		}else if(getParam("Event") == "SCAN"){
