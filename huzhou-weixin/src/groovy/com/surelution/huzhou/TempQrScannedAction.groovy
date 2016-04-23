@@ -10,12 +10,8 @@ class TempQrScannedAction extends HuzhouBaseAction {
 
 	public boolean accept() {
 		def qrId
-		println qrId
 		if(getParam("Event") == "subscribe") {
-			def eventKey = getParam("EventKey")
-			if(eventKey && eventKey.startsWith("qrscene_")) {
-				qrId = eventKey.substring("qrscene_".length())
-			}
+			return true
 		} else if(getParam("Event") == "SCAN") {
 			qrId = getParam("EventKey")
 		}
@@ -31,7 +27,29 @@ class TempQrScannedAction extends HuzhouBaseAction {
 	}
 
 	public void execute() {
-		println code
+		if(getParam("Event") == "subscribe"){
+			def drawSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
+			if(!drawSub){
+				drawSub = new DrawingTicketSubscribing2016EarlySummber()
+				drawSub.subscriber = subscriber
+				drawSub.dateCreated = new Date()
+				//此处分配奖品
+				drawSub.prize = Prize2016EarlySummber.findByValuable(false)
+				if(drawSub.prize.valuable == false){
+					drawSub.winningSn = null
+				}
+				put(new Attribute(Attribute.KEY_Content, drawSub.save(flush:true)))
+				drawSub.save(flush:true)
+			}
+		}else if(getParam("Event") == "SCAN"){
+			def drawScn = new DrawingTicketScanningQr2016EarlySummber()
+			drawScn.subscriber = subscriber
+			drawScn.dateCreated = new Date()
+			drawScn.prize = Prize2016EarlySummber.findByValuable(false)
+			if(drawScn.prize.valuable == false){
+				drawScn.winningSn = null
+			}
+		}
 	}
 
 }

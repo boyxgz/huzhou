@@ -89,10 +89,19 @@ class Event2016EarlySummberController {
 	 * @return
 	 */
 	def drawing() {
+		/**
+		 * @return 分享的url
+		 */
 		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
 		def url = Auth2Util.buildRedirectUrl(dest, subscriber.openId, Auth2Util.AuthScope.BASE)
 		
-		def lucky = 1;
+		/**
+		 * @return 返回中奖记录
+		 */
+		DrawingTicket2016EarlySummber drawing = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
+		if(!drawing || drawing.isUse == true){
+			drawing = DrawingTicketScanningQr2016EarlySummber.list()[0]
+		}
 		
 		def lastDrawing = DrawingTicket2016EarlySummber.createCriteria().list{
 			eq("subscriber",subscriber)
@@ -111,11 +120,17 @@ class Event2016EarlySummberController {
 			isToday = todaySDF.format(today) < todaySDF.format(lastDrawingDate)
 		}
 		
+		
 		println isToday
 		
-		[url:url,lucky:lucky,lastDrawingDate:lastDrawingDate,isToday:isToday]
+		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,drawing:drawing]
 	}
 	
+	def useTicket(long id){
+		def drawing = DrawingTicket2016EarlySummber.get(id)
+		drawing.isUse == true
+		drawing.save(flush:true)
+	}
 	/**
 	 * 助力情况,及其获奖情况页
 	 * @return

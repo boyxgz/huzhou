@@ -127,9 +127,14 @@
 					alert("今天已抽过了，明天再来")
 					return
 				}
+				var url = "${createLink(action:'useTicket',controller:'Event2016EarkySummber',id:drawing.id}";
+				$.ajax({
+					type : 'post',
+					url : url
+				});
 				//获取随机数(奖品个数范围内),再此处决定选中那个奖品
 				//var item = rnd(1,turnplate.restaraunts.length);
-				var item = ${lucky}
+				var item = ${drawing?.prize?.index}
 				
 				//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
 				rotateFn(item, turnplate.restaraunts[item-1]);

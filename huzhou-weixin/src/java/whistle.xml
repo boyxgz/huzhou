@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <wx>
-<<<<<<< HEAD
 	<token>whistle</token>
 	<appid>wx7f2dfab7d651d75e</appid>
 	<secret>839fe1e7c1618fc4aa0e1362bdfe1784</secret>
-=======
-	<token>ouasdfsdhuwrqzhfdsfsdfcxzve</token>
-	<appid>wx2fc522376d1831c4</appid>
-	<secret>95fe6dd42e9355220356a3b4b1ffcd83</secret>
->>>>>>> refs/remotes/origin/master
 	<checkRequestRestrictly>true</checkRequestRestrictly>
 	<processor-chain>
+		<processor>com.surelution.huzhou.TempQrScannedAction</processor>
 		<processor>com.surelution.whistle.core.SampleAction</processor>
 	</processor-chain>
 </wx>

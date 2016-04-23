@@ -46,20 +46,12 @@ class TempQrCode {
 	}
 
 	String qrKey
-<<<<<<< HEAD
+
 	/**
 	 * 二维码内容
 	 */
 	String content
-	
-=======
-	
-	/**
-	 * 二维码内的内容
-	 */
-	String content
 
->>>>>>> refs/remotes/origin/master
 	Date dateCreated
 	
 	Date expiredAt
