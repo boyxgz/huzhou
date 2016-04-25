@@ -14,6 +14,7 @@ class Prize2016EarlySummber {
 
 	/**
 	 * 其实是没有中奖
+	 * 是否有价值
 	 */
 	Boolean valuable = false
 	String description

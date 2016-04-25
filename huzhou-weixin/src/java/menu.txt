@@ -2,46 +2,21 @@
     "button": [
         
         {
-            "name": "挂号预约",
-            "sub_button": [
-                {
-                    "type": "view",
-                    "name": "在线挂号",
-                    "url": "http://qiushengming.sh-hansi.com/introDoctor/introDoctor"
-                },
-                {
-                    "type": "view",
-                    "name": "个人中心",
-                    "url": "http://qiushengming.sh-hansi.com/patientPortal/personalCenter"
-                },
-                {
-                    "type": "view",
-                    "name": "预约指南",
-                    "url": "http://yijuan.sh-hansi.com/patientPortal/handbook"
-                }
-            ]
+            "name": "Token",
+            "type": "view",
+            "url": "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7f2dfab7d651d75e&secret=839fe1e7c1618fc4aa0e1362bdfe1784"
         },
         
         {
-            "name": "医生选择",
+            "name": "助攻查询",
             "type":"view",
-            "url":"http://qiushengming.sh-hansi.com/patientPortal/selectDoctor"
+            "url":"http://qiushengming.sh-hansi.com/Event2016EarlySummber/callingInformation"
           },
           
           {
             "name": "关于我们",
-            "sub_button": [
-                {
-                    "type": "view",
-                    "name": "科室简介",
-                    "url": "http://qiushengming.sh-hansi.com/introDepartment/introdeDartment"
-                },
-                {
-                    "type": "view",
-                    "name": "联系我们",
-                    "url": "http://qiushengming.sh-hansi.com/contact/contact"
-                }
-            ]
+            "type": "view",
+            "url":"http://qiushengming.sh-hansi.com/Event2016EarlySummber/drawing"
         }      
     ]
 }

@@ -4,7 +4,7 @@
 <r:layoutResources />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>瑞金微信管理后台</title>
+<title>湖州微信管理后台</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="shortcut icon" href="${resource(dir: 'images', file: '')}" type="image/x-icon">
 <link rel="apple-touch-icon" href="${resource(dir: 'images', file: '')}">
@@ -69,39 +69,32 @@
 		<aside class="main-sidebar">			
 			<section class="sidebar">				
 				<ul class="sidebar-menu">
-					<%--<li class="header"></li>		
+					<!-- 报表导航链接开始 -->
+					<li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i>
+							<span>中奖报表</span> <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">中奖报表</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="exchangePrize">兑奖报表</g:link></li>
+						</ul></li>
+					<!-- 报表导航链接结束 -->
 					
-					--%><!-- 一个导航链接开始 -->
-					<li class="treeview"><a href="#"><i class="fa  fa-map"></i>
-							<span>医生管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+					<!-- 用户管理导航链接开始 -->
+					<li class="treeview"><a href="#"><i class="fa  fa-table"></i>
+							<span>用户管理</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="Doctor" action="list">医生信息</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">用户管理</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="list">权限管理</g:link></li>
 						</ul></li>
-					<!-- 一个导航链接结束 -->
+					<!-- 用户管理导航链接结束 -->
 					
-					<!-- 一个导航链接开始 -->
-					<li class="treeview"><a href="#"><i class="fa  fa-map"></i>
-							<span>预约挂号</span> <i class="fa fa-angle-left pull-right"></i></a>
+					<!-- 系统设置导航链接开始 -->
+					<li class="treeview"><a href="#"><i class="fa  fa-edit"></i>
+							<span>系统</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="WokingType" action="list">班次种类管理</g:link></li>
-						    <li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="Schedule" action="list">排班管理</g:link></li>
-						    <li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="Reservation" action="list">预约时间管理</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">中奖率设置</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="list">奖项设置</g:link></li>
 						</ul></li>
-					<!-- 一个导航链接结束 -->
-					<li class="treeview"><a href="#"><i class="fa  fa-map"></i>
-							<span>健康宣教</span> <i class="fa fa-angle-left pull-right"></i></a>
-						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="health" action="list">健康宣教</g:link></li>
-						</ul></li>
-					<!-- 一个导航链接开始 -->
-					<li class="treeview"><a href="#"><i class="fa  fa-map"></i>
-							<span>系统设置</span> <i class="fa fa-angle-left pull-right"></i></a>
-						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="appVar" action="list">全局变量</g:link></li>
-						    <li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="doctorGroup" action="list">群组设置</g:link></li>
-						    <li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="KeyedMessage" action="list">关键字设置</g:link></li>
-						</ul></li>
-					<!-- 一个导航链接结束 -->
+					<!-- 系统设置导航链接结束 -->
 					
 				</ul>
 				<!-- /.sidebar-menu -->

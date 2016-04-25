@@ -61,12 +61,12 @@
 						</div>
 				    </div>
 				</div>
-				<div class="col-xs-12 col-sm-12">
+				<%--<div class="col-xs-12 col-sm-12">
 					<p>查看助力情况按钮</p>
 				</div>
 				<div class="col-xs-12 col-sm-12">
 					抽奖情况显示的内容
-				</div>
+				</div>--%>
 			</div>
 		</div>
 	</body>
@@ -126,7 +126,7 @@
 					
 				}
 				//TODO
-				var url = "${createLink(action:'useTicket',controller:'event2016EarlySummber',id:drawing.id)}";
+				var url = "${createLink(action:'useTicket',controller:'event2016EarlySummber',id:drawing?.id)}";
 				alert(url);
 				$.ajax({url : url});
 				//获取随机数(奖品个数范围内),再此处决定选中那个奖品
