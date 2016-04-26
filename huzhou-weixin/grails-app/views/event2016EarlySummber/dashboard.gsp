@@ -19,7 +19,7 @@
 				<p class="text-content">${KeyedMessage.findByKey("Welcome-to-language").message }</p>
 			</div>
 			<div class="col-xs-4 col-sm-4 left-offset">
-				<g:if test="${isDrawingSub == null }">
+				<g:if test="${isDrawingSub.isUse == false }">
 					<g:link action="drawing" controller="Event2016EarlySummber" id="">
 						<input type="button" value="戳我抽奖哦" class="btn btn-default"/>
 					</g:link>

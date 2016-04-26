@@ -3,7 +3,7 @@ package com.surelution.huzhou
 import grails.util.Holders
 
 import java.text.SimpleDateFormat
-
+import grails.converters.JSON
 import org.junit.After;
 
 import com.sun.jmx.snmp.Timestamp
@@ -81,6 +81,13 @@ class Event2016EarlySummberController {
 	 */
 	def dashboard() {
 		def isDrawingSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
+		if(!isDrawingSub){
+			isDrawingSub = new DrawingTicket2016EarlySummber()
+			isDrawingSub.subscriber = subscriber
+			isDrawingSub.dateCreated = new Date()
+			isDrawingSub.prize = Prize2016EarlySummber.get(1)
+			isDrawingSub.save(flush:true)
+		}
 		[isDrawingSub:isDrawingSub]
 	}
 	
@@ -91,10 +98,9 @@ class Event2016EarlySummberController {
 	def drawing(Long id) {
 		
 		DrawingTicket2016EarlySummber ticket = DrawingTicket2016EarlySummber.get(id)
-		if(ticket.subscriber.id != subscriber.id) {
+		if(ticket?.subscriber.id != subscriber.id) {
 			//TODO 非法的抽奖
 		}
-		
 		
 		/**
 		 * @return 分享的url
@@ -105,10 +111,7 @@ class Event2016EarlySummberController {
 		/**
 		 * @return 返回中奖记录
 		 */
-		DrawingTicket2016EarlySummber drawing = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
-		if(!drawing || drawing.isUse == true){
-			drawing = DrawingTicketScanningQr2016EarlySummber.list()[0]
-		}
+		
 		
 		/**
 		 * @return 抽奖的机会
@@ -134,15 +137,18 @@ class Event2016EarlySummberController {
 		}
 		
 		
-		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,drawing:drawing,ticketNum:ticketNum]
+		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,ticketNum:ticketNum, ticket:ticket]
 	}
 	
 	def useTicket(long id){
 		def drawing = DrawingTicket2016EarlySummber.get(id)
+		println drawing
 		drawing?.isUse = true
-		println drawing.drawAt
-		drawing.drawAt = new Date()
+		drawing?.drawingAt = new Date()
 		drawing.save(flush:true)
+		def a = [abc:drawing.index]
+		println a as JSON
+		render a as JSON
 	}
 	/**
 	 * 助力情况,及其获奖情况页

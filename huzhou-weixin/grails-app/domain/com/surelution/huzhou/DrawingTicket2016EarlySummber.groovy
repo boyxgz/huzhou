@@ -18,7 +18,12 @@ class DrawingTicket2016EarlySummber {
 		drawingAt nullable:true
 		winningSn nullable:true
 		winningSn unique:true
+		index nullabel:true
     }
+	
+	static mapping = {
+		index column:'_index'
+	}
 	
 	def afterInsert(){
 		long l = id * 100
@@ -43,6 +48,8 @@ class DrawingTicket2016EarlySummber {
 	 * 是否已兑奖
 	 */
 	Boolean rewarded = false
+	
+	int index
 	
 	String getWellLookSn() {
 		StringBuffer sb = new StringBuffer(winningSn)

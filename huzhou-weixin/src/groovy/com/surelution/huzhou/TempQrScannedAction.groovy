@@ -22,6 +22,7 @@ class TempQrScannedAction extends HuzhouBaseAction {
 				}
 			}
 		}
+		println qrKey
 		if(qrKey) {
 			code = TempQrCode.findByQrKey(qrKey)
 		}
@@ -29,6 +30,7 @@ class TempQrScannedAction extends HuzhouBaseAction {
 	}
 
 	public void execute() {
+		println 1
 		def attr = code.scaned(subscriber)
 		if(attr)
 			put(attr)
