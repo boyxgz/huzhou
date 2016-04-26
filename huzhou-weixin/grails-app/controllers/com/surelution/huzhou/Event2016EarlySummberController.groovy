@@ -25,7 +25,7 @@ class Event2016EarlySummberController {
 	 */
 	def beforeInterceptor = {
 		
-		subscriber = Subscriber.get(2)
+//		subscriber = Subscriber.get(2)
 		def userSn = request.getCookie('subscriber-sn')
 		
 		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
@@ -88,7 +88,14 @@ class Event2016EarlySummberController {
 	 * 抽奖页
 	 * @return
 	 */
-	def drawing() {
+	def drawing(Long id) {
+		
+		DrawingTicket2016EarlySummber ticket = DrawingTicket2016EarlySummber.get(id)
+		if(ticket.subscriber.id != subscriber.id) {
+			//TODO 非法的抽奖
+		}
+		
+		
 		/**
 		 * @return 分享的url
 		 */

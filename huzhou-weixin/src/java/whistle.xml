@@ -5,7 +5,6 @@
 	<secret>fa95cbaf9bd2985671fe9f206ee9ce02</secret>
 	<checkRequestRestrictly>true</checkRequestRestrictly>
 	<processor-chain>
-		<processor>com.surelution.huzhou.Event2016EarlySummerAction</processor>
 		<processor>com.surelution.huzhou.TempQrScannedAction</processor>
 		<processor>com.surelution.whistle.core.SampleAction</processor>
 	</processor-chain>
