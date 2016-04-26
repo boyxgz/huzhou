@@ -34,7 +34,7 @@ class DrawPrizeService {
 			}
 			int factor = (sn -lastDay) % maxPlayer
 			if(nums.contains(factor)) {
-				def c = DrawingTicket2016EarlySummber.countByPrizeAndDrawAtBetween(batch, firstSignt, firstSigntNextDay)
+				def c = DrawingTicket2016EarlySummber.countByPrizeAndDrawingAtBetween(batch, firstSignt, firstSigntNextDay)
 				if(c < batch.quantityPerDay) {
 					prize = batch
 				}
@@ -44,7 +44,7 @@ class DrawPrizeService {
 			prize = Prize2016EarlySummber.findByValuable(false)
 		}
 		ticket.prize = prize
-		ticket.drawAt = now
+		ticket.drawingAt = now
 		ticket.pointerAt = prize.pointerAt
 		ticket.save(flush:true)
     }
