@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>瑞金管理系统</title>
+<title>湖州微信后台管理系统</title>
 <link rel="stylesheet" href="${resource(dir:'jarvis/css',file:'AdminLTE.min.css')}">
 <script type="text/javascript" src="${resource(dir:'jarvis/js',file:'bootstrap.min.js') }"></script>
 <script type="text/javascript" src="${resource(dir:'jarvis/js',file:'icheck.min.js') }"></script>

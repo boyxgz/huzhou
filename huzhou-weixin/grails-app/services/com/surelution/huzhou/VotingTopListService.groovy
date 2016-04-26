@@ -16,6 +16,7 @@ class VotingTopListService {
 	private synchronized void updateList() {
 		def vCri = Resposing2016EarlySummberEvent.createCriteria()
 		println vCri
+		println "vCri"
 		def c = vCri.list {
 			projections {
 				groupProperty('calling')
@@ -25,14 +26,18 @@ class VotingTopListService {
 			order("sub","desc")
 		}
 		println c
+		println "C"
 		votingCounts = c.collect() {
 			it[1]
 		}
+		println votingCounts
+		println "votingCounts"
 		lastUpdate = System.currentTimeMillis()
 	}
 	
 	def int topAt(int value) {
 		println value
+		println "value"
 		if(System.currentTimeMillis() - lastUpdate > updatePerid) {
 			updateList()
 		}

@@ -60,8 +60,8 @@
 				<!-- Navbar Right Menu -->
 				<div class="pull-right" style="margin-top:8px;">
 					<span class="hidden-xs" style="font-size:16px; color:#fff;">当前用户：<sec:username /></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<g:link controller="user" action="showChangePw" class="btn btn-default" style=" width:65px;"><p style="margin-left:-4px; font-size:12px;">修改密码</p></g:link>&nbsp;&nbsp;
-					<g:link controller="logout" class="btn btn-default" style=" width:65px;"><p style="font-size:12px; margin-left:-4px;">退出登录</p></g:link>&nbsp;&nbsp;&nbsp;
+					<g:link controller="user" action="showChangePw" class="btn btn-default" style="height:35px; width:65px;"><p style="margin-left:-4px; font-size:12px;">修改密码</p></g:link>&nbsp;&nbsp;
+					<g:link controller="logout" class="btn btn-default" style=" height:35px; width:65px;"><p style="font-size:12px; margin-left:-4px;">退出登录</p></g:link>&nbsp;&nbsp;&nbsp;
 				</div>
 			</nav>
 		</header>
@@ -90,8 +90,8 @@
 					<li class="treeview"><a href="#"><i class="fa  fa-edit"></i>
 							<span>系统</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">中奖率设置</g:link></li>
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="list">奖项设置</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="setRate" action="index">中奖率设置</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="Prize2016EarlySummber" action="list">奖项设置</g:link></li>
 						</ul></li>
 					<!-- 系统设置导航链接结束 -->
 					

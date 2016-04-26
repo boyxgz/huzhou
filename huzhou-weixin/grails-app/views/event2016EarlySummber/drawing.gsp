@@ -131,7 +131,6 @@
 				}
 				//TODO
 				var url = "${createLink(action:'useTicket',controller:'event2016EarlySummber',id:drawing?.id)}";
-				alert(url);
 				$.ajax({url : url});
 				//获取随机数(奖品个数范围内),再此处决定选中那个奖品
 				//var item = rnd(1,turnplate.restaraunts.length);

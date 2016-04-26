@@ -11,6 +11,13 @@
 			.table{width:96%; margin-left:2%;}
 			.modalstyle{ width: 40%; background-color:#F5F5F5; filter:alpha(opacity=50); margin-left:30%; height:45%; margin-top:5%; border-radius:5px;}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				if(${flash.message} != null){
+					alert($(flash.message));
+				}
+			})
+		</script>
 	</head>
 	<body>
 		<div class="content-wrapper">
@@ -64,10 +71,10 @@
 								<td><g:if test="${userInstance.passwordExpired}">是</g:if><g:else>否</g:else></td>
 								
 								<td>
-									<a href="${createLink(action:'delete',controller:'user',id:userInstance.id) }" onclick="return confirm('${message(code:'default.button.delete.confirm.message',default:'亲，确认删除嘛？ ')}')" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></a>
+									<%--<a href="${createLink(action:'delete',controller:'user',id:userInstance.id) }" onclick="return confirm('${message(code:'default.button.delete.confirm.message',default:'亲，确认删除嘛？ ')}')" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></a>--%>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<a data-toggle="modal" href="${createLink(action:'edit',controller:'user',id:userInstance.id) }" data-target="#editUser" class="glyphicon glyphicon-pencil" title="编辑"></a>
-									<div class="modal fade" id="editUser" role="dialog">
+									<div class="modal" id="editUser" role="dialog">
 							        	<div class="modal-dialog">
 								             <div class="modal-content">
 								             </div>

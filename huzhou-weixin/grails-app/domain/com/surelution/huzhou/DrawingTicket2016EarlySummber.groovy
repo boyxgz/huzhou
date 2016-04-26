@@ -5,12 +5,17 @@ import org.apache.commons.lang3.RandomUtils
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
+/**
+ * 抽奖券，已这个为准，表名用户有多少个抽奖机会。
+ * @author Administrator
+ *
+ */
 class DrawingTicket2016EarlySummber {
 
     static constraints = {
 		winningSn nullable:true
 		prize nullable:true
-		drawAt nullable:true
+		drawingAt nullable:true
 		winningSn nullable:true
 		winningSn unique:true
 		pointerAt nullable:true
@@ -31,7 +36,7 @@ class DrawingTicket2016EarlySummber {
 	
 	Subscriber subscriber
 	Date dateCreated
-	Date drawAt
+	Date drawingAt
 	Prize2016EarlySummber prize
 	String winningSn
 	Boolean isUse = false

@@ -25,10 +25,10 @@ class ReportController {
 			createAlias("prize", "p") 
 			eq("p.valuable", true)
 			if(start){
-				ge("dateCreated",start)
+				ge("drawAt",start)
 			}
 			if(end){
-				le("dateCreated",end)
+				le("drawAt",end)
 			}
 		}
 		
@@ -66,10 +66,10 @@ class ReportController {
 			eq("p.valuable", true)
 			eq("rewarded",true)
 			if(start){
-				ge("dateCreated",start)
+				ge("drawAt",start)
 			}
 			if(end){
-				le("dateCreated",end)
+				le("drawAt",end)
 			}
 		}
 		
