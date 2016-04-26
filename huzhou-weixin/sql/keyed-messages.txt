@@ -1,2 +1,4 @@
 EVENT-2016-EARLY-SUMMER-QR-SCANNED-DUPLICATED=
 EVENT-2016-EARLY-SUMMER-QR-SCANNED-MORE-THAN-ONCE-A-DAY=
+2016-early-summer-draw-prize-max-player-daily=
+2016-early-summer-draw-prize-last-day-count=

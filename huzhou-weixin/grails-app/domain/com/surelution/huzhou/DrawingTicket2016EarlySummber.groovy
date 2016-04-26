@@ -19,6 +19,7 @@ class DrawingTicket2016EarlySummber {
 		winningSn nullable:true
 		winningSn unique:true
 		index nullabel:true
+		pointerAt nullable:true
     }
 	
 	static mapping = {
@@ -44,6 +45,7 @@ class DrawingTicket2016EarlySummber {
 	Prize2016EarlySummber prize
 	String winningSn
 	Boolean isUse = false
+	Integer pointerAt
 	/**
 	 * 是否已兑奖
 	 */
