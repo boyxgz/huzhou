@@ -32,15 +32,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${prize2016EarlySummberInstance?.index}">
-				<li class="fieldcontain">
-					<span id="index-label" class="property-label"><g:message code="prize2016EarlySummber.index.label" default="Index" /></span>
-					
-						<span class="property-value" aria-labelledby="index-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="index"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${prize2016EarlySummberInstance?.amount}">
 				<li class="fieldcontain">
 					<span id="amount-label" class="property-label"><g:message code="prize2016EarlySummber.amount.label" default="Amount" /></span>
@@ -50,11 +41,56 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${prize2016EarlySummberInstance?.index}">
+				<li class="fieldcontain">
+					<span id="index-label" class="property-label"><g:message code="prize2016EarlySummber.index.label" default="Index" /></span>
+					
+						<span class="property-value" aria-labelledby="index-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="index"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${prize2016EarlySummberInstance?.luckyNum}">
+				<li class="fieldcontain">
+					<span id="luckyNum-label" class="property-label"><g:message code="prize2016EarlySummber.luckyNum.label" default="Lucky Num" /></span>
+					
+						<span class="property-value" aria-labelledby="luckyNum-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="luckyNum"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${prize2016EarlySummberInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="prize2016EarlySummber.name.label" default="Name" /></span>
 					
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="name"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${prize2016EarlySummberInstance?.positions}">
+				<li class="fieldcontain">
+					<span id="positions-label" class="property-label"><g:message code="prize2016EarlySummber.positions.label" default="Positions" /></span>
+					
+						<span class="property-value" aria-labelledby="positions-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="positions"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${prize2016EarlySummberInstance?.quantity}">
+				<li class="fieldcontain">
+					<span id="quantity-label" class="property-label"><g:message code="prize2016EarlySummber.quantity.label" default="Quantity" /></span>
+					
+						<span class="property-value" aria-labelledby="quantity-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="quantity"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${prize2016EarlySummberInstance?.quantityPerDay}">
+				<li class="fieldcontain">
+					<span id="quantityPerDay-label" class="property-label"><g:message code="prize2016EarlySummber.quantityPerDay.label" default="Quantity Per Day" /></span>
+					
+						<span class="property-value" aria-labelledby="quantityPerDay-label"><g:fieldValue bean="${prize2016EarlySummberInstance}" field="quantityPerDay"/></span>
 					
 				</li>
 				</g:if>

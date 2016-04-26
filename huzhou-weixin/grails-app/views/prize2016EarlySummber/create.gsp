@@ -6,31 +6,29 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<div class="modal-header">
-			<h4><b><g:message code="default.create.label" args="[entityName]" /></b></h4>
-		</div>
-		<g:form action="save" >
-			<div class="modal-body" role="main">
-				<g:if test="${flash.message}">
-					<div class="message" role="status">${flash.message}</div>
-				</g:if>
-				<g:hasErrors bean="${prize2016EarlySummberInstance}">
-				<ul class="errors" role="alert">
-					<g:eachError bean="${prize2016EarlySummberInstance}" var="error">
-					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-					</g:eachError>
-				</ul>
-				</g:hasErrors>
-					<fieldset class="form">
-						<g:render template="form"/>
-					</fieldset>
-			</div>
-			<div class="modal-footer">
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+	<div class="modal-header"></div>
+		<div id="create-prize2016EarlySummber" class="modal-body" role="main">
+			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<g:hasErrors bean="${prize2016EarlySummberInstance}">
+			<ul class="errors" role="alert">
+				<g:eachError bean="${prize2016EarlySummberInstance}" var="error">
+				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+				</g:eachError>
+			</ul>
+			</g:hasErrors>
+			<g:form action="save" >
+				<fieldset class="form">
+					<g:render template="form"/>
 				</fieldset>
-			</div>
-		</g:form>
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				</fieldset>
+			</g:form>
+		</div>
+		<div class="modal-footer">
+		</div>
 	</body>
 </html>
-	

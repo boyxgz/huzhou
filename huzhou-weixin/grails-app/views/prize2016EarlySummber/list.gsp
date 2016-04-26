@@ -7,29 +7,31 @@
 		<g:set var="entityName" value="${message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 		<style>
-			.box{margin-top:35px;}
+			.box{ margin-top:35px;}
 			.table{width:96%; margin-left:2%;}
-			h3{padding:15px;}
-			.modalstyle{ width: 40%; background-color:#F5F5F5; filter:alpha(opacity=50); margin-left:30%; height:58%; margin-top:5%; border-radius:5px;}
+			.modalstyle{ width: 40%; background-color:#F5F5F5; filter:alpha(opacity=50); margin-left:30%; height:45%; margin-top:5%; border-radius:5px;}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				if("${flash.message}"){
-					alert("${flash.message}");
+				if(${flash.message} != null){
+					alert($(flash.message));
 				}
 			})
 		</script>
 	</head>
 	<body>
-	<div class="content-wrapper">
-	<div class="container">
-		<div class="box box-info" role="main">
-			<h3><g:message code="default.list.label" args="[entityName]" /></h3>
+		<div class="content-wrapper">
+		<div class="container">
+		<div id="list-prize2016EarlySummber" class="box box-info" role="main">
+			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+			</g:if>
 			<div class="row">
 				<div class="col-md-4">
-					<g:link action="create" controller="prize2016EarlySummber" data-toggle="modal" data-target="#createPrize" style="margin-left:21px;text-decoration:underline;">
+					<g:link action="create" data-toggle="modal" data-target="#createUser" style="margin-left:21px;text-decoration:underline;">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新建奖项</g:link>
-					<div class="modal fade" id="createPrize" role="dialog">
+					<div class="modal fade" id="createUser" role="dialog">
 			             <div class="modal-dialog">
 				             <div class="modal-content">
 				             </div>
@@ -37,7 +39,7 @@
 		             </div>	
 				</div>
 			</div>
-			<table class="table table-bordered table-respose">
+			<table class="table table-bordered table-repose">
 				<thead>
 					<tr>
 						<g:sortableColumn class="alink" property="name" title="${message(code: 'prize2016EarlySummber.name.label', default: 'Name')}" />
@@ -45,12 +47,12 @@
 						<g:sortableColumn class="alink" property="description" title="${message(code: 'prize2016EarlySummber.description.label', default: 'Description')}" />
 					
 						<g:sortableColumn class="alink" property="amount" title="${message(code: 'prize2016EarlySummber.amount.label', default: 'Amount')}" />
-					
-						<g:sortableColumn class="alink" property="index" title="${message(code: 'prize2016EarlySummber.index.label', default: 'Index')}" />
 						
-						<g:sortableColumn class="alink" property="valuable" title="${message(code: 'prize2016EarlySummber.valuable.label', default: 'Valuable')}" />
+						<th>商品总量</th>
 						
-						<th>操作</th>
+						<g:sortableColumn class="alink" property="positions" title="${message(code: 'prize2016EarlySummber.positions.label', default: 'Positions')}" />
+						
+						<td>操作</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,33 +64,31 @@
 						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "description")}</td>
 					
 						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "amount")}</td>
-					
-						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "index")}</td>
-						
-						<td><g:if test="${prize2016EarlySummberInstance.valuable}">是</g:if><g:else>否</g:else></td>
+						<td>${ prize2016EarlySummberInstance?.quantity}</td>
+						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "positions")}</td>
 						
 						<td>
-							<a href="${createLink(action:'delete',controller:'prize2016EarlySummber',id:prize2016EarlySummberInstance.id) }" onclick="return confirm('${message(code:'default.button.delete.confirm.message',default:'亲，确认删除嘛？ ')}')" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a data-toggle="modal" href="${createLink(action:'edit',controller:'prize2016EarlySummber',id:prize2016EarlySummberInstance.id) }" data-target="#editPrize" class="glyphicon glyphicon-pencil" title="编辑"></a>
-							<div class="modal" id="editPrize" role="dialog">
-					        	<div class="modal-dialog">
-						             <div class="modal-content">
-						             </div>
-					            </div>
-				            </div>
-				            <script type="text/javascript">
-								$(function(){
-									$("a[data-target=#editPrize]").click(function(event) {
-										$(this).data('editPrize',null)
-									    event.preventDefault();
-									    var target = $(this).attr("href"); 
-										    $("#editPrize").load(target, function() { 
-										    	$("#editPrize").addClass("modalstyle")
-								                $("#editPrize").modal('show');  }); 				    	
-										    });
-									});
-							</script>
+							<a href="${createLink(action:'delete',id:prize2016EarlySummberInstance.id) }" onclick="return confirm('${message(code:'default.button.delete.confirm.message',default:'亲，确认删除嘛？ ')}')" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<a data-toggle="modal" href="${createLink(action:'edit',id:prize2016EarlySummberInstance.id) }" data-target="#editUser" class="glyphicon glyphicon-pencil" title="编辑"></a>
+									<div class="modal" id="editUser" role="dialog">
+							        	<div class="modal-dialog">
+								             <div class="modal-content">
+								             </div>
+							            </div>
+						            </div>
+						            <script type="text/javascript">
+										$(function(){
+											$("a[data-target=#editUser]").click(function(event) {
+												$(this).data('editUser',null)
+											    event.preventDefault();
+											    var target = $(this).attr("href"); 
+												    $("#editUser").load(target, function() { 
+												    	$("#editUser").addClass("modalstyle")
+										                $("#editUser").modal('show');  }); 				    	
+												    });
+											});
+									</script>
 						</td>
 					</tr>
 				</g:each>
@@ -98,7 +98,7 @@
 				<g:paginate total="${prize2016EarlySummberInstanceTotal}" />
 			</div>
 		</div>
-	</div>
-	</div>
+		</div>
+		</div>
 	</body>
 </html>

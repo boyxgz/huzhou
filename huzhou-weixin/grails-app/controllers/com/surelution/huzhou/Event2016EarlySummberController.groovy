@@ -20,15 +20,16 @@ class Event2016EarlySummberController {
 	private Subscriber subscriber
 
 	def votingTopListService
+	def drawPrizeService
 	/**
 	 * 自动登录
 	 */
 	def beforeInterceptor = {
 		
-		subscriber = Subscriber.get(1)
+		subscriber = Subscriber.get(2)
 		def userSn = request.getCookie('subscriber-sn')
 		
-//		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
+		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
 		if(!subscriber) {
 			def requestUrl = request.forwardURI
 			def baseUrl = Holders.config.grails.serverURL
@@ -141,12 +142,16 @@ class Event2016EarlySummberController {
 	}
 	
 	def useTicket(long id){
+		println id
 		def drawing = DrawingTicket2016EarlySummber.get(id)
 		println drawing
-		drawing?.isUse = true
-		drawing?.drawingAt = new Date()
-		drawing.save(flush:true)
-		def a = [abc:drawing.index]
+//		println drawing
+//		drawing?.isUse = true
+//		drawing?.drawingAt = new Date()
+//		drawing.save(flush:true)
+		drawPrizeService.draw(drawing)
+		println drawing
+		def a = [abc:drawing.pointerAt]
 		println a as JSON
 		render a as JSON
 	}

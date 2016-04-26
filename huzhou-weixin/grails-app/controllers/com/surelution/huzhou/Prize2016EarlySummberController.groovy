@@ -26,9 +26,8 @@ class Prize2016EarlySummberController {
             return
         }
 
-        flash.message = "奖品新建成功！" 
-//		message(code: 'default.created.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), prize2016EarlySummberInstance.id])
-        redirect(action: "list", id: prize2016EarlySummberInstance.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), prize2016EarlySummberInstance.id])
+        redirect(action: "show", id: prize2016EarlySummberInstance.id)
     }
 
     def show(Long id) {
@@ -78,25 +77,21 @@ class Prize2016EarlySummberController {
             return
         }
 
-        flash.message = prize2016EarlySummberInstance.name +"更新成功" 
-//		message(code: 'default.updated.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), prize2016EarlySummberInstance.id])
-        redirect(action: "list", id: prize2016EarlySummberInstance.id)
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), prize2016EarlySummberInstance.id])
+        redirect(action: "show", id: prize2016EarlySummberInstance.id)
     }
 
     def delete(Long id) {
         def prize2016EarlySummberInstance = Prize2016EarlySummber.get(id)
         if (!prize2016EarlySummberInstance) {
-            flash.message = "该奖项不存在。" 
-//			message(code: 'default.not.found.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), id])
             redirect(action: "list")
             return
         }
 
         try {
-			def msg = prize2016EarlySummberInstance.name
             prize2016EarlySummberInstance.delete(flush: true)
-            flash.message = msg +"奖项已删除。" 
-//			message(code: 'default.deleted.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
