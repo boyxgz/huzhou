@@ -13,6 +13,7 @@ class DrawingTicket2016EarlySummber {
 		drawAt nullable:true
 		winningSn nullable:true
 		winningSn unique:true
+		pointerAt nullable:true
     }
 	
 	def afterInsert(){
@@ -34,6 +35,7 @@ class DrawingTicket2016EarlySummber {
 	Prize2016EarlySummber prize
 	String winningSn
 	Boolean isUse = false
+	Integer pointerAt
 	/**
 	 * 是否已兑奖
 	 */
