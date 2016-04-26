@@ -6,6 +6,7 @@
 	<checkRequestRestrictly>true</checkRequestRestrictly>
 	<processor-chain>
 		<processor>com.surelution.huzhou.Event2016EarlySummerAction</processor>
+		<processor>com.surelution.huzhou.TempQrScannedAction</processor>
 		<processor>com.surelution.whistle.core.SampleAction</processor>
 	</processor-chain>
 </wx>

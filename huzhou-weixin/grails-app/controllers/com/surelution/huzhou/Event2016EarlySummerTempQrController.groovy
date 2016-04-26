@@ -1,6 +1,7 @@
 package com.surelution.huzhou
 
 import grails.util.Holders;
+import groovy.time.TimeCategory;
 
 import com.surelution.whistle.push.qrcode.QrCode
 
@@ -49,4 +50,16 @@ class Event2016EarlySummerTempQrController {
 		}
 		render("${(int)(amount / 6)}")
 	}
+//	
+//	def test(){
+//		def now = new Date()
+//		println now.clearTime()
+//		def nows = now.clearTime()
+//		def nows1 = new Date(nows.time)
+//		println nows1
+//		use(TimeCategory){
+//			nows1 = nows1 + 1.day
+//		}
+//		println nows1
+//	}
 }

@@ -46,9 +46,9 @@ class TempQrCode {
 	}
 
 	String qrKey
-	
+
 	/**
-	 * 二维码内的内容
+	 * 二维码内容
 	 */
 	String content
 

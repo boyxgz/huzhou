@@ -7,9 +7,9 @@ class User {
 	String username
 	String password
 	boolean enabled
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+	boolean accountExpired = false
+	boolean accountLocked = false
+	boolean passwordExpired = false
 	
 	static transients = ['springSecurityService', 'branch', 'gasStation', 'restrictedByBranch', 'restrictedByStation','uploadFilePath']
 
