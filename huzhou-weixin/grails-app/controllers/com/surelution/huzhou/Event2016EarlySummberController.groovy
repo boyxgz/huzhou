@@ -25,10 +25,10 @@ class Event2016EarlySummberController {
 	 */
 	def beforeInterceptor = {
 		
-		subscriber = Subscriber.get(2)
+		subscriber = Subscriber.get(1)
 		def userSn = request.getCookie('subscriber-sn')
 		
-		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
+//		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
 		if(!subscriber) {
 			def requestUrl = request.forwardURI
 			def baseUrl = Holders.config.grails.serverURL
@@ -127,14 +127,13 @@ class Event2016EarlySummberController {
 		}
 		
 		
-		println isToday
-		
 		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,drawing:drawing,ticketNum:ticketNum]
 	}
 	
 	def useTicket(long id){
 		def drawing = DrawingTicket2016EarlySummber.get(id)
-		drawing.isUse = true
+		drawing?.isUse = true
+		println drawing.drawAt
 		drawing.drawAt = new Date()
 		drawing.save(flush:true)
 	}
@@ -158,6 +157,7 @@ class Event2016EarlySummberController {
 		 * 排名数
 		 */
 		def topAt = votingTopListService.topAt(resposingNum)
+		println topAt
 		[drawingTicketSca:drawingTicketSca,drawingTicketSub:drawingTicketSub,resposingNum:resposingNum,topAt:topAt]
 	}
 	
