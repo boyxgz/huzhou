@@ -2,6 +2,7 @@ package com.surelution.huzhou
 
 import org.apache.commons.lang3.RandomUtils
 
+
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
 class DrawingTicket2016EarlySummber {

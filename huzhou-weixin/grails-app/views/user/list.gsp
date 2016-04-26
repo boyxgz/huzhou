@@ -9,6 +9,7 @@
 		<style>
 			.box{ margin-top:35px;}
 			.table{width:96%; margin-left:2%;}
+			.modalstyle{ width: 40%; background-color:#F5F5F5; filter:alpha(opacity=50); margin-left:30%; height:45%; margin-top:5%; border-radius:5px;}
 		</style>
 	</head>
 	<body>
@@ -44,23 +45,47 @@
 								<g:sortableColumn class="alink" property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled')}" />
 							
 								<g:sortableColumn class="alink" property="passwordExpired" title="${message(code: 'user.passwordExpired.label', default: 'Password Expired')}" />
-							
+								
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
 						<g:each in="${userInstanceList}" status="i" var="userInstance">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							
-								<td>${fieldValue(bean: userInstance, field: "username")}</td>
+								<td><g:link action="show" id="${userInstance?.id }">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
 							
-								<td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
+								<td><g:if test="${userInstance.accountExpired}">是</g:if><g:else>否</g:else></td>
 							
-								<td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>
+								<td><g:if test="${userInstance.accountLocked}">是</g:if><g:else>否</g:else></td>
 							
-								<td><g:formatBoolean boolean="${userInstance.enabled}" /></td>
+								<td><g:if test="${userInstance.enabled}">是</g:if><g:else>否</g:else></td>
 							
-								<td><g:formatBoolean boolean="${userInstance.passwordExpired}" /></td>
-							
+								<td><g:if test="${userInstance.passwordExpired}">是</g:if><g:else>否</g:else></td>
+								
+								<td>
+									<a href="${createLink(action:'delete',controller:'user',id:userInstance.id) }" onclick="return confirm('${message(code:'default.button.delete.confirm.message',default:'亲，确认删除嘛？ ')}')" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<a data-toggle="modal" href="${createLink(action:'edit',controller:'user',id:userInstance.id) }" data-target="#editUser" class="glyphicon glyphicon-pencil" title="编辑"></a>
+									<div class="modal fade" id="editUser" role="dialog">
+							        	<div class="modal-dialog">
+								             <div class="modal-content">
+								             </div>
+							            </div>
+						            </div>
+						            <script type="text/javascript">
+										$(function(){
+											$("a[data-target=#editUser]").click(function(event) {
+												$(this).data('editUser',null)
+											    event.preventDefault();
+											    var target = $(this).attr("href"); 
+												    $("#editUser").load(target, function() { 
+												    	$("#editUser").addClass("modalstyle")
+										                $("#editUser").modal('show');  }); 				    	
+												    });
+											});
+									</script>
+								</td>
 							</tr>
 						</g:each>
 						</tbody>
@@ -73,3 +98,4 @@
 		</div>
 	</body>
 </html>
+									

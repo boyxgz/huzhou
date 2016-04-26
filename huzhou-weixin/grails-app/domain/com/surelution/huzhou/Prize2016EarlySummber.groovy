@@ -20,4 +20,5 @@ class Prize2016EarlySummber {
 	String description
 	//用来索引罗盘上的位置
 	Integer index
+	//数量
 }

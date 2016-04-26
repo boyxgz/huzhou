@@ -29,9 +29,9 @@
 								<span class="required-indicator">*</span>
 							</label>
 						</dt>
-						<dd>
+						<dd><div class="col-md-6">
 							<g:textField name="username" class="form-control" required="" value="${userInstance?.username}"/>
-						</dd>
+						</div></dd>
 					</dl>
 					<dl class="dl-horizontal">
 						<dt>
@@ -40,55 +40,26 @@
 								<span class="required-indicator">*</span>
 							</label>
 						</dt>
-						<dd>
+						<dd><div class="col-md-6">
 							<g:textField name="password" class="form-control" required="" value="${userInstance?.password}"/>
-						</dd>
-					</dl>
-					<dl class="dl-horizontal">
-						<dt>
-						<label for="accountExpired">
-							<g:message code="user.accountExpired.label" default="Account Expired" />
-						</label>
-						</dt>
-						<dd>
-							<g:checkBox name="accountExpired" class="form-control" value="${userInstance?.accountExpired}" />
-						</dd>
-					</dl>
-					<dl class="dl-horizontal">
-						<dt>
-							<label for="accountLocked">
-								<g:message code="user.accountLocked.label" default="Account Locked" />
-							</label>
-						</dt>
-						<dd>
-							<g:checkBox name="accountLocked" class="form-control" value="${userInstance?.accountLocked}" />
-						</dd>
+						</div></dd>
 					</dl>
 					<dl class="dl-horizontal">
 						<dt>
 							<label for="enabled">
 								<g:message code="user.enabled.label" default="Enabled" />
+								<span class="required-indicator">*</span>
 							</label>
 						</dt>
-						<dd>
-							<g:checkBox name="enabled" class="form-control" value="${userInstance?.enabled}" />
-						</dd>
-					</dl>
-					<dl class="dl-horizontal">
-						<dt>
-							<label for="passwordExpired">
-								<g:message code="user.passwordExpired.label" default="Password Expired" />
-							</label>
-						</dt>
-						<dd>
-							<g:checkBox name="passwordExpired" class="form-control"  value="${userInstance?.passwordExpired}" />
-						</dd>
+						<dd><div class="col-md-6">
+							<g:checkBox name="enabled" class="" value="${userInstance?.enabled}" />
+						</div></dd>
 					</dl>
 				</fieldset>
 			</div>
 			<div class="modal-footer">
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
 		</div>
 		</g:form>

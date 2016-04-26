@@ -1,5 +1,6 @@
 <%@page import = "grails.util.Holders" %>
 <%@page import = "com.surelution.huzhou.KeyedMessage" %>
+<%@page import = "com.surelution.huzhou.DrawingTicket2016EarlySummber" %>
 <!doctype html>
 <html lang="zh-CN">
 	<head>
@@ -67,6 +68,9 @@
 				<div class="col-xs-12 col-sm-12">
 					抽奖情况显示的内容
 				</div>--%>
+				<div class="col-xs-12 col-sm-12">
+					<p>剩余抽奖机会${DrawingTicket2016EarlySummber.findAllByIsUse(false) }</p>
+				</div>
 			</div>
 		</div>
 	</body>

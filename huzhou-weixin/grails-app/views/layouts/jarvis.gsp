@@ -60,8 +60,8 @@
 				<!-- Navbar Right Menu -->
 				<div class="pull-right" style="margin-top:8px;">
 					<span class="hidden-xs" style="font-size:16px; color:#fff;">当前用户：<sec:username /></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<g:link controller="user" action="showChangePW" class="btn btn-default" style="height:30px;; width:65px;"><p style="margin-left:-4px; font-size:12px;">修改密码</p></g:link>&nbsp;&nbsp;
-					<g:link controller="logout" class="btn btn-default" style="height:30px; width:65px;"><p style="font-size:12px; margin-left:-4px;">退出登录</p></g:link>&nbsp;&nbsp;&nbsp;
+					<g:link controller="user" action="showChangePw" class="btn btn-default" style=" width:65px;"><p style="margin-left:-4px; font-size:12px;">修改密码</p></g:link>&nbsp;&nbsp;
+					<g:link controller="logout" class="btn btn-default" style=" width:65px;"><p style="font-size:12px; margin-left:-4px;">退出登录</p></g:link>&nbsp;&nbsp;&nbsp;
 				</div>
 			</nav>
 		</header>
@@ -82,8 +82,7 @@
 					<li class="treeview"><a href="#"><i class="fa  fa-table"></i>
 							<span>用户管理</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">用户管理</g:link></li>
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="list">权限管理</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="user" action="list">用户管理</g:link></li>
 						</ul></li>
 					<!-- 用户管理导航链接结束 -->
 					

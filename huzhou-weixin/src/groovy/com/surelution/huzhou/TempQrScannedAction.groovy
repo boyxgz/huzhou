@@ -30,6 +30,7 @@ class TempQrScannedAction extends HuzhouBaseAction {
 		if(getParam("Event") == "subscribe"){
 			def drawSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
 			if(!drawSub){
+				put(new Attribute(Attribute.KEY_Content,"关注获得抽奖机会一次"))
 				drawSub = new DrawingTicketSubscribing2016EarlySummber()
 				drawSub.subscriber = subscriber
 				drawSub.dateCreated = new Date()

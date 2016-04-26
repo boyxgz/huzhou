@@ -3,88 +3,71 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="jarvis">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<title><g:message code="user.show.label" args="[entityName]" /></title>
+		<style>
+			.box{ margin-top:35px;}
+			.buttons{ padding: 15px; margin-left: 10px;}
+			.user{ padding-left: 130px; line-height: 40px;}
+			h3{padding:15px;}
+		</style>
 	</head>
 	<body>
-		<a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="show-user" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+	<div class="content-wrapper">
+	<div class="container">
+		<div id="show-user" class="box box-info" role="main">
+			<h3><g:message code="user.show.label" args="[entityName]" /></h3>
+			<g:if test="${false}">
+				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list user">
-			
-				<g:if test="${userInstance?.username}">
-				<li class="fieldcontain">
-					<span id="username-label" class="property-label"><g:message code="user.username.label" default="Username" /></span>
-					
-						<span class="property-value" aria-labelledby="username-label"><g:fieldValue bean="${userInstance}" field="username"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.password}">
-				<li class="fieldcontain">
-					<span id="password-label" class="property-label"><g:message code="user.password.label" default="Password" /></span>
-					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${userInstance}" field="password"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.accountExpired}">
-				<li class="fieldcontain">
-					<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>
-					
-						<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${userInstance?.accountExpired}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.accountLocked}">
-				<li class="fieldcontain">
-					<span id="accountLocked-label" class="property-label"><g:message code="user.accountLocked.label" default="Account Locked" /></span>
-					
-						<span class="property-value" aria-labelledby="accountLocked-label"><g:formatBoolean boolean="${userInstance?.accountLocked}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.enabled}">
-				<li class="fieldcontain">
-					<span id="enabled-label" class="property-label"><g:message code="user.enabled.label" default="Enabled" /></span>
-					
-						<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${userInstance?.enabled}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.passwordExpired}">
-				<li class="fieldcontain">
-					<span id="passwordExpired-label" class="property-label"><g:message code="user.passwordExpired.label" default="Password Expired" /></span>
-					
-						<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${userInstance?.id}" />
-					<g:link class="edit" action="edit" id="${userInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+			<dl class="dl-horizontal">
+				<dt>
+					<g:message code="user.username.label" default="Username" />
+				</dt>
+				<dd><div class="col-md-4">
+					<input type="text" value="${userInstance?.username}" class="form-control" name="username" id="username"/>
+				</div></dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>
+					<g:message code="user.enabled.label" default="Account Expired" />
+				</dt>
+				<dd><div class="col-md-4">
+					<input type="text" value="<g:if test="${userInstance?.enabled}">是</g:if><g:else>否</g:else>" class="form-control" name="enabled" id="enabled" />
+				</div></dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>当前权限</dt>
+				<dd><div class="col-md-4">
+					<input type="text" class="form-control" value="${role?.description }" />
+				</div></dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>选择权限</dt>
+				<dd><div class="col-md-4">
+					<g:select name="role" value="${role?.description }" from="${com.surelution.huzhou.Role.list() }" 
+					optionKey="id" optionValue="description" class="form-control" name="roleSelelct" id="roleSelect"/>
+				</div></dd>
+			</dl>
+			<g:form action="update">
+			<fieldset class="buttons">
+				<g:hiddenField name="id" value="${userInstance?.id}" />
+				<input type="hidden" name="role" id="role" value="${role?.id }" />
+				<input type="submit" value="<g:message code="default.button.confirm.label" default="confirm" />" class="btn btn-primary" />
+				<g:actionSubmit class="btn btn-warning" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+			</fieldset>
 			</g:form>
+		<br/>
 		</div>
+	</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#roleSelect").change(function(){
+				$("#role").val($("#roleSelect").val());
+			})
+		});
+	</script>
 	</body>
 </html>

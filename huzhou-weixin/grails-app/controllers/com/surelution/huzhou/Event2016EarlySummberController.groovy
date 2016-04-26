@@ -134,8 +134,8 @@ class Event2016EarlySummberController {
 	
 	def useTicket(long id){
 		def drawing = DrawingTicket2016EarlySummber.get(id)
-		println 111111
 		drawing.isUse = true
+		drawing.drawAt = new Date()
 		drawing.save(flush:true)
 	}
 	/**
