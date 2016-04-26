@@ -1,5 +1,7 @@
 package com.surelution.huzhou
 
+import grails.util.Holders
+
 import org.apache.commons.lang3.RandomUtils
 
 import com.surelution.whistle.core.Attribute
@@ -34,6 +36,8 @@ class TempQrCode {
 		tablePerHierarchy true
 		qrKey index:'qr_key_index'
 	}
+	
+	static transients = ['rootPath']
 
 	def afterInsert() {
 		def r = RandomUtils.nextInt(0, MAX_REFUSING_NUM)
@@ -64,7 +68,11 @@ class TempQrCode {
 	 * @param subscriber
 	 * @return
 	 */
-	public Attribute scanedBy(Subscriber subscriber) {
-		
+	public Attribute scaned(Subscriber subscriber) {
+		null
+	}
+	
+	public String getRootPath() {
+		Holders.config.grails.serverURL
 	}
 }

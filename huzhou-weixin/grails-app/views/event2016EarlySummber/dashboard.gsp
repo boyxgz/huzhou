@@ -25,7 +25,7 @@
 					</g:link>
 				</g:if>
 				<g:else>
-					<g:link action="" id="">
+					<g:link action="callingInformation">
 						<input type="button" value="戳我查看您的抽奖情况哦" class="btn btn-default" />
 					</g:link>
 				</g:else>

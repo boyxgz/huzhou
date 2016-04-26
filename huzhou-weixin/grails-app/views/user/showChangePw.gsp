@@ -6,26 +6,20 @@
 <g:set var="entityName"
 	value="${message(code: 'user.label', default: 'User')}" />
 <title>修改密码</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		if("${flash.message}"){
+			alert("${flash.message}");
+		}
+	})
+</script>
 </head>
 <body>
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>
-				修改密码<small></small>
-			</h1>
-			<%--<ol class="breadcrumb">
-					<li><a href="#" style="cursor: none;"><i class="fa fa-dashboard"></i> 修改密码</a></li>
-					<li class="active"></li>
-				</ol>
-				--%>
+			<h1> 修改密码<small></small> </h1>
 		</section>
-		<g:if test="${flash.message}">
-			<div class="message" role="status"
-				style="color: red; font-weight: bold;">
-				${flash.message}
-			</div>
-		</g:if>
 		<g:hasErrors bean="${userInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${userInstance}" var="error">

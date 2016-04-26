@@ -33,6 +33,11 @@ abstract class HuzhouBaseAction extends BaseAction {
 
 	final public void preExecute() {
 		Set<String> paramNames = paramNames()
+		
+		paramNames.each {p->
+			println "${p}@${getParam(p)}"
+		}
+		
 		IncomeMessage sub = new IncomeMessage()
 		sub.content = getParam(KEY_Content)
 		
