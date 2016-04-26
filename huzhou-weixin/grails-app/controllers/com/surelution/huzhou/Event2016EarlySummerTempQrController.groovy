@@ -19,10 +19,9 @@ class Event2016EarlySummerTempQrController {
 		}
 		render("${amount} Qr Code Created!")
 	}
-	
+
 	def complete() {
 		def qrs = TempQrEvent2016EarlySummber.findAllByContentIsNull()
-		println qrs
 		qrs.each {qr->
 			def is = QrCode.getTempQr(qr.qrKey, A_MONTH_SECOND)
 			def filePath = "${Holders.config.qrFile.path}/${qr.qrKey}.jpg"
@@ -30,6 +29,7 @@ class Event2016EarlySummerTempQrController {
 			fos << is
 			fos.flush()
 			fos.close()
+			is.close()
 			//the inputstream from web does'nt support mark, 
 			//so read the stream again from file system
 			def content = QrCode.decodeQr(new FileInputStream(filePath))
@@ -37,5 +37,16 @@ class Event2016EarlySummerTempQrController {
 			qr.save()
 		}
 		render("${qrs.size()}")
+	}
+	
+	def generateQr() {
+		def amount = params.int('amount')
+		if(!amount) {
+			amount = 10001
+		}
+		for(int i = 0; i < amount / 6; i++) {
+			CardGenerator.compositePage(6 * i + 1, 6 * i + 7, i);
+		}
+		render("${(int)(amount / 6)}")
 	}
 }
