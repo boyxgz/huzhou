@@ -16,7 +16,7 @@
           {
             "name": "送你“游”",
             "type": "view",
-            "url":"http://qiushengming.sh-hansi.com/Event2016EarlySummber/drawing"
+            "url":"http://qiushengming.sh-hansi.com/Event2016EarlySummber/dashboard"
         }      
     ]
 }

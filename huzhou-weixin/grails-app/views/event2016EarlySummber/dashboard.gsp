@@ -1,5 +1,6 @@
 <%@page import="com.surelution.huzhou.KeyedMessage" %>
 <%@page import="com.surelution.huzhou.Prize2016EarlySummber" %>
+<%@page import="grails.util.Holders" %>
 <!doctype html>
 <html lang="zh-CN">
 	<head>
@@ -9,6 +10,36 @@
 		<link rel="stylesheet" href="${resource(file:'css/myself.css') }" type="text/css" />
 		<script type="text/javascript" src="${resource(file:'js/jquery.min.js') }"></script>
 		<title>我来送你“游”</title>
+		<wx:registerJsapi apiList="'onMenuShareTimeline','onMenuShareAppMessage'"/>
+		<script type="text/javascript">
+			wx.ready(function(){
+				wx.onMenuShareTimeline({
+				    title: '${KeyedMessage.findByKey("Ranking-share-title").message}', // 分享标题
+				    link: '${url}',  // 分享链接
+				    imgUrl: '${Holders.config.grails.serverURL}/images/2.jpg', // 分享图标
+				    success: function () {
+				        // 用户确认分享后执行的回调函数
+				    },
+				    cancel: function () { 
+				        // 用户取消分享后执行的回调函数
+				    }
+				});
+			});
+			wx.onMenuShareAppMessage({
+			    title: '${KeyedMessage.findByKey("Ranking-share-title")?.message}', // 分享标题
+			    desc: '${KeyedMessage.findByKey("Ranking-share-desc")?.message}', // 分享描述
+			    link: '${url}', // 分享链接
+			    imgUrl: '${Holders.config.grails.serverURL}/images/2.jpg', // 分享图标
+			    type: 'link', // 分享类型,music、video或link，不填默认为link
+			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			    success: function () { 
+			        // 用户确认分享后执行的回调函数
+			    },
+			    cancel: function () {
+			        // 用户取消分享后执行的回调函数
+			    }
+			});
+		</script>
 		<style>
 			body{background-color:rgba(185, 205, 203, 0.47);}
 		</style>
@@ -16,17 +47,17 @@
 	<body>
 		<div class="container">
 			<div class="col-xs-12 col-sm-12 box">
-				<p class="text-content">${KeyedMessage.findByKey("Welcome-to-language").message }</p>
+				<p class="text-content" style="color:red;">${KeyedMessage.findByKey("Welcome-to-language").message }</p>
 			</div>
 			<div class="col-xs-4 col-sm-4 left-offset">
-				<g:if test="${isDrawingSub.isUse == false }">
-					<g:link action="drawing" controller="Event2016EarlySummber" id="">
+				<g:if test="${isDrawingSub.drawingAt == null }">
+					<g:link action="callingInformation" controller="Event2016EarlySummber" id="${isDrawingSub?.id }">
 						<input type="button" value="戳我抽奖哦" class="btn btn-default"/>
 					</g:link>
 				</g:if>
 				<g:else>
 					<g:link action="callingInformation">
-						<input type="button" value="戳我查看您的抽奖情况哦" class="btn btn-default" />
+						<input type="button" value="查看抽奖情况" class="btn btn-default" />
 					</g:link>
 				</g:else>
 			</div>
@@ -43,7 +74,7 @@
 						<g:if test="${prize?.valuable }">
 							<td>${prize?.name }</td>
 							<td>${prize?.amount }</td>
-							<td>${prize?.amount }</td>
+							<td>${prize?.quantity }</td>
 							<td>${prize?.description }</td>
 						</g:if>
 					</tr>

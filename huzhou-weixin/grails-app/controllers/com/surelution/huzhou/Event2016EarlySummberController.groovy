@@ -21,15 +21,20 @@ class Event2016EarlySummberController {
 
 	def votingTopListService
 	def drawPrizeService
+	
+	/**
+	 * 分享页面的url
+	 */
+	
+	
 	/**
 	 * 自动登录
 	 */
 	def beforeInterceptor = {
 		
-		subscriber = Subscriber.get(2)
 		def userSn = request.getCookie('subscriber-sn')
-		
-		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
+		subscriber = Subscriber.get(2)
+//		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
 		if(!subscriber) {
 			def requestUrl = request.forwardURI
 			def baseUrl = Holders.config.grails.serverURL
@@ -55,9 +60,17 @@ class Event2016EarlySummberController {
 	 * @return
 	 */
 	def intro(Long id) {
+		def supported = true
 		def beneficiary = Subscriber.get(id)
-		def callingShare = Calling2016EarlySummberEvent.findBySubscriber(beneficiary)
-		def resposing = Resposing2016EarlySummberEvent.findBySubscriber(subscriber)
+		def callingShare = Calling2016EarlySummberEvent.findOrSaveBySubscriber(beneficiary)
+		def resposing = Resposing2016EarlySummberEvent.findByCallingAndSubscriber(callingShare, subscriber)
+		if(resposing == null) {
+			supported = false
+			resposing = new Resposing2016EarlySummberEvent()
+			resposing.calling = callingShare
+			resposing.subscriber = subscriber
+			resposing.save(flush:true)
+		}
 		
 		/**
 		 * 此处flash.messag没有触发
@@ -65,13 +78,6 @@ class Event2016EarlySummberController {
 		if(resposing != null){
 			flash.message = KeyedMessage.findByKey("There-are").message
 				.replace("##",UserInfo.loadUserInfo(beneficiary.openId).nickname)
-		}
-		if(beneficiary && callingShare && resposing == null){
-			resposing = new Resposing2016EarlySummberEvent()
-			resposing.calling = callingShare
-			resposing.subscriber = subscriber
-			resposing.dateCreated = new Date()
-			resposing.save(flush:true)
 		}
 		[beneficiary:beneficiary]
 	}
@@ -83,13 +89,15 @@ class Event2016EarlySummberController {
 	def dashboard() {
 		def isDrawingSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
 		if(!isDrawingSub){
-			isDrawingSub = new DrawingTicket2016EarlySummber()
+			isDrawingSub = new DrawingTicketSubscribing2016EarlySummber()
 			isDrawingSub.subscriber = subscriber
 			isDrawingSub.dateCreated = new Date()
-			isDrawingSub.prize = Prize2016EarlySummber.get(1)
 			isDrawingSub.save(flush:true)
 		}
-		[isDrawingSub:isDrawingSub]
+		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
+		def url = Auth2Util.buildRedirectUrl(dest, subscriber.openId, Auth2Util.AuthScope.BASE)
+		
+		[isDrawingSub:isDrawingSub,url:url]
 	}
 	
 	/**
@@ -97,26 +105,14 @@ class Event2016EarlySummberController {
 	 * @return
 	 */
 	def drawing(Long id) {
-		
-		DrawingTicket2016EarlySummber ticket = DrawingTicket2016EarlySummber.get(id)
-		if(ticket?.subscriber.id != subscriber.id) {
-			//TODO 非法的抽奖
+		DrawingTicket2016EarlySummber ticket
+		if(id){
+			ticket = DrawingTicket2016EarlySummber.get(id)
+			if(ticket?.subscriber.id != subscriber.id) {
+				//TODO 非法的抽奖
+			}
 		}
 		
-		/**
-		 * @return 分享的url
-		 */
-		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
-		def url = Auth2Util.buildRedirectUrl(dest, subscriber.openId, Auth2Util.AuthScope.BASE)
-		
-		/**
-		 * @return 返回中奖记录
-		 */
-		
-		
-		/**
-		 * @return 抽奖的机会
-		 */
 		def ticketNum = DrawingTicket2016EarlySummber.findAllByIsUse(false).size()
 		
 		def lastDrawing = DrawingTicket2016EarlySummber.createCriteria().list{
@@ -137,8 +133,9 @@ class Event2016EarlySummberController {
 			isToday = todaySDF.format(today) < todaySDF.format(lastDrawingDate)
 		}
 		
-		
-		[url:url,lastDrawingDate:lastDrawingDate,isToday:isToday,ticketNum:ticketNum, ticket:ticket]
+		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
+		println ticket.pointerAt
+		[url:dest,lastDrawingDate:lastDrawingDate,isToday:isToday,ticketNum:ticketNum, ticket:ticket]
 	}
 	
 	def useTicket(long id){
@@ -151,8 +148,7 @@ class Event2016EarlySummberController {
 //		drawing.save(flush:true)
 		drawPrizeService.draw(drawing)
 		println drawing
-		def a = [abc:drawing.pointerAt]
-		println a as JSON
+		def a = [abc:drawing.pointerAt, wardSn:drawing.wellLookSn]
 		render a as JSON
 	}
 	/**
@@ -160,10 +156,8 @@ class Event2016EarlySummberController {
 	 * @return
 	 */
 	def callingInformation(){
-		def drawingTicketSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
-		def drawingTicketSca = DrawingTicketScanningQr2016EarlySummber.createCriteria().list{
-			createAlias ("prize", "p") 
-			eq("p.valuable",true)
+		def ticket = DrawingTicket2016EarlySummber.createCriteria().list{
+			eq("subscriber",subscriber)
 		}
 		
 		/**
@@ -175,8 +169,9 @@ class Event2016EarlySummberController {
 		 * 排名数
 		 */
 		def topAt = votingTopListService.topAt(resposingNum)
-		println topAt
-		[drawingTicketSca:drawingTicketSca,drawingTicketSub:drawingTicketSub,resposingNum:resposingNum,topAt:topAt]
+		def dest = "${Holders.config.grails.serverURL}/event2016EarlySummber/calling/${subscriber.id}"
+		println dest
+		[drawingTicket:ticket,resposingNum:resposingNum,topAt:topAt,url:dest]
 	}
 	
 	def onMenuShareSuccess(Long id){
@@ -187,6 +182,6 @@ class Event2016EarlySummberController {
 			callingShare.dateCreated = new Date()
 			callingShare.save(flush:true)
 		}	
-		redirect(action:'drawing')
+		redirect(action:'drawing', id:id)
 	}
 }

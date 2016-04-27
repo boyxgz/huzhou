@@ -40,7 +40,7 @@ class TempQrEvent2016EarlySummber extends TempQrCode {
 			def attr = new NewsAttribute()
 			attr.add(KeyedMessage.findByKey("EVENT-2016-EARLY-SUMMER-QR-SCANNED-TITLE")?.message, 
 				KeyedMessage.findByKey("EVENT-2016-EARLY-SUMMER-QR-SCANNED-DESCRIPTION")?.message, 
-				"${rootPath}/images/springsource.png", 
+				"${rootPath}/images/springsource.jpg", 
 				"${rootPath}/event2016EarlySummber/drawing/${ticket.id}")
 			return attr
 		} else { //当天扫描超过一次

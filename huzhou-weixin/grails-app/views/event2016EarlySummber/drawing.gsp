@@ -17,11 +17,9 @@
 				wx.onMenuShareTimeline({
 				    title: '${KeyedMessage.findByKey("Ranking-share-title").message}', // 分享标题
 				    link: '${url}',  // 分享链接
-				    imgUrl: '${Holders.config.grails.serverURL}/images/1.png', // 分享图标
+				    imgUrl: '${Holders.config.grails.serverURL}/images/2.jpg', // 分享图标
 				    success: function () {
 				        // 用户确认分享后执行的回调函数
-				        var url = "${createLink(action:"onMenuShareSuccess",controller:"Event2016EarlySummber")}"
-				        document.location.href = url;
 				    },
 				    cancel: function () { 
 				        // 用户取消分享后执行的回调函数
@@ -32,7 +30,7 @@
 			    title: '${KeyedMessage.findByKey("Ranking-share-title")?.message}', // 分享标题
 			    desc: '${KeyedMessage.findByKey("Ranking-share-desc")?.message}', // 分享描述
 			    link: '${url}', // 分享链接
-			    imgUrl: '${Holders.config.grails.serverURL}/images/1.png', // 分享图标
+			    imgUrl: '${Holders.config.grails.serverURL}/images/2.jpg', // 分享图标
 			    type: 'link', // 分享类型,music、video或link，不填默认为link
 			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 			    success: function () { 
@@ -51,7 +49,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12">
-					<div style="max-width:600px; margin:0 auto; margin-top:30%;">
+					<div style="max-width:600px; margin:0 auto; margin-top:10%;">
 						<img src="${resource(file:'images/1.png') }" id="shan-img" style="display:none;" />
 						<img src="${resource(file:'images/2.png') }" id="sorry-img" style="display:none;" />
 						<div class="banner">
@@ -69,12 +67,17 @@
 					抽奖情况显示的内容
 				</div>--%>
 				<div class="col-xs-12 col-sm-12">
-					<p>剩余抽奖机会</p>
+					<p id="pPrize" style="text-align: center; color:#fff; font-size:20px; line-height:50px;"></p>
+				</div>
+				<div class="col-xs-12 col-sm-12" style="position:relative; left:30%;">
+					<g:link class="btn btn-default" action="callingInformation"  >查看抽奖情况</g:link> 
 				</div>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript">
+		var drawn = ${ticket.drawingAt != null};
+		//var drawn = false;
 		var turnplate={
 				restaraunts:[],				//大转盘奖品名称
 				colors:[],					//大转盘奖品区块对应背景颜色
@@ -84,116 +87,125 @@
 				startAngle:0,				//开始角度
 				bRotate:false				//false:停止;ture:旋转
 		};
+		var rotateTimeOut = function (){
+			$('#wheelcanvas').rotate({
+				angle:0,
+				animateTo:2160,
+				duration:8000,
+				callback:function (){
+					alert('网络超时，请检查您的网络设置！');
+				}
+			});
+		};
+	
+		//旋转转盘 item:奖品位置; txt：提示语;
+		var rotateFn = function (item, txt, wardSn){
+			var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length*2));
+			if(angles<270){
+				angles = 270 - angles; 
+			}else{
+				angles = 360 - angles + 270;
+			}
+			$('#wheelcanvas').stopRotate();
+			$('#wheelcanvas').rotate({
+				angle:0,
+				animateTo:angles+1800,
+				duration:8000,
+				callback:function (){
+					if(txt != "谢谢惠顾"){
+						txt = "恭喜您获得" + txt;
+						txt += "<br/>中奖码：";
+						txt += wardSn;
+						}
+					
+					$("#pPrize").html(txt);
+					turnplate.bRotate = !turnplate.bRotate;
+				}
+			});
+		};
+
+		function rotatePlate() {
+			if(turnplate.bRotate)return;
+			turnplate.bRotate = !turnplate.bRotate;
+
+			if(${isToday}){
+				
+			}
+			//TODO
+			var url = "${createLink(action:'useTicket',controller:'event2016EarlySummber',id:ticket?.id)}";
+			//获取随机数(奖品个数范围内),再此处决定选中那个奖品
+			//var item = rnd(1,turnplate.restaraunts.length);
+			var item, wardSn;				
+			$.ajax({
+				url:url,
+				dataType : "json",
+				success : function(data){
+					item = data.abc;
+					wardSn = data.wardSn
+					//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
+					rotateFn(item, turnplate.restaraunts[item-1], wardSn);
+					drawn = true
+					/* switch (item) {
+						case 1:
+							rotateFn(252, turnplate.restaraunts[0]);
+							break;
+						case 2:
+							rotateFn(216, turnplate.restaraunts[1]);
+							break;
+						case 3:
+							rotateFn(180, turnplate.restaraunts[2]);
+							break;
+						case 4:
+							rotateFn(144, turnplate.restaraunts[3]);
+							break;
+						case 5:
+							rotateFn(108, turnplate.restaraunts[4]);
+							break;
+						case 6:
+							rotateFn(72, turnplate.restaraunts[5]);
+							break;
+						case 7:
+							rotateFn(36, turnplate.restaraunts[6]);
+							break;
+						case 8:
+							rotateFn(360, turnplate.restaraunts[7]);
+							break;
+						case 9:
+							rotateFn(324, turnplate.restaraunts[8]);
+							break;
+						case 10:
+							rotateFn(288, turnplate.restaraunts[9]);
+							break;
+					} */
+					console.log(item);
+				
+				}
+			});
+		}
 		
 		$(document).ready(function(){
 			//动态添加大转盘的奖品与奖品区域背景颜色
 			turnplate.restaraunts = ["388元油卡充值", "谢谢惠顾", "188元油卡充值", "谢谢惠顾", "88元油卡充值", "谢谢惠顾", "38元油卡充值 ", "谢谢惠顾", "价值5元便利店商品", "谢谢惠顾"];
 			turnplate.colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
 		
-			
-			var rotateTimeOut = function (){
-				$('#wheelcanvas').rotate({
-					angle:0,
-					animateTo:2160,
-					duration:8000,
-					callback:function (){
-						alert('网络超时，请检查您的网络设置！');
-					}
-				});
-			};
-		
-			//旋转转盘 item:奖品位置; txt：提示语;
-			var rotateFn = function (item, txt){
-				var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length*2));
-				if(angles<270){
-					angles = 270 - angles; 
-				}else{
-					angles = 360 - angles + 270;
+			$('.pointer').click(function() {
+				if(drawn) {
+					alert("您已经抽奖过，不能重复抽奖");
+					return;
 				}
-				$('#wheelcanvas').stopRotate();
-				$('#wheelcanvas').rotate({
-					angle:0,
-					animateTo:angles+1800,
-					duration:8000,
-					callback:function (){
-						alert(txt);
-						turnplate.bRotate = !turnplate.bRotate;
-					}
-				});
-			};
-		
-			$('.pointer').click(function (){
-				if(turnplate.bRotate)return;
-				turnplate.bRotate = !turnplate.bRotate;
-
-				if(${isToday}){
-					
-				}
-				//TODO
-				var url = "${createLink(action:'useTicket',controller:'event2016EarlySummber',id:ticket?.id)}";
-				//获取随机数(奖品个数范围内),再此处决定选中那个奖品
-				//var item = rnd(1,turnplate.restaraunts.length);
-				var item;				
-				$.ajax({
-					url:url,
-					dataType : "json",
-					success : function(data){
-						item = data.abc;
-
-
-
-
-						//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
-						rotateFn(item, turnplate.restaraunts[item-1]);
-						/* switch (item) {
-							case 1:
-								rotateFn(252, turnplate.restaraunts[0]);
-								break;
-							case 2:
-								rotateFn(216, turnplate.restaraunts[1]);
-								break;
-							case 3:
-								rotateFn(180, turnplate.restaraunts[2]);
-								break;
-							case 4:
-								rotateFn(144, turnplate.restaraunts[3]);
-								break;
-							case 5:
-								rotateFn(108, turnplate.restaraunts[4]);
-								break;
-							case 6:
-								rotateFn(72, turnplate.restaraunts[5]);
-								break;
-							case 7:
-								rotateFn(36, turnplate.restaraunts[6]);
-								break;
-							case 8:
-								rotateFn(360, turnplate.restaraunts[7]);
-								break;
-							case 9:
-								rotateFn(324, turnplate.restaraunts[8]);
-								break;
-							case 10:
-								rotateFn(288, turnplate.restaraunts[9]);
-								break;
-						} */
-						console.log(item);
-					
-					}
-				});
-			});
+				rotatePlate();
+			} );
+			if(drawn) {
+				rotatePlate();
+			}
 		});
-		
-		function rnd(n, m){
-			var random = Math.floor(Math.random()*(m-n+1)+n);
-			return random;
-			
-		}
-		
 		
 		//页面所有元素加载完毕后执行drawRouletteWheel()方法对转盘进行渲染
 		window.onload=function(){
 			drawRouletteWheel();
+			if(${ticket?.prize != null}){
+				console.log(${ticket?.pointerAt});
+			}
 		};
 		
 		function drawRouletteWheel() {    

@@ -50,7 +50,7 @@ class DrawPrizeService {
 			prize = Prize2016EarlySummber.findByValuable(false)
 		}
 		ticket.prize = prize
-		ticket.drawingAt = now
+		ticket.drawingAt = new Date()
 		ticket.pointerAt = prize.pointerAt
 		ticket.save(flush:true)
     }

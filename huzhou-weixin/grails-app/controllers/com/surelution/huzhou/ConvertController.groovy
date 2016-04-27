@@ -2,5 +2,8 @@ package com.surelution.huzhou
 
 class ConvertController {
 
-    def index() { }
+    def index() {
+		
+	}
+	
 }

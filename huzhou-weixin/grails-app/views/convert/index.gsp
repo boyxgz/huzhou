@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div class="content-wrapper">
-			
+			<div class="container"></div>
 		</div>
 	</body>
 </html>

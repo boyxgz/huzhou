@@ -8,6 +8,7 @@ package com.surelution.huzhou
 class Calling2016EarlySummberEvent {
 
     static constraints = {
+		subscriber unique:true
     }
 
 	Subscriber subscriber
