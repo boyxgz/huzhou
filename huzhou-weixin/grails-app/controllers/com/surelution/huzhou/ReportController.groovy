@@ -62,15 +62,15 @@ class ReportController {
 			start = params.date("startAt","yyyy-MM-dd")
 			end = params.date("endAt","yyyy-MM-dd")
 		}
-		def admin = KeyedMessage.findByKey("admin").message
+//		def admin = KeyedMessage.findByKey("admin").message
 		def isGainPrize = DrawingTicket2016EarlySummber.createCriteria().list(params){
 			createAlias("prize", "p")
 			eq("p.valuable", true)
 			eq("rewarded",true)
-			if(springSecurityService.currentUser.username != admin){
-				eq("user",springSecurityService.currentUser)
-			}
-			
+//			if(springSecurityService.currentUser.username != admin){
+//				eq("user",springSecurityService.currentUser)
+//			}
+			eq("user",springSecurityService.currentUser)
 			if(start){
 				ge("rewaredAt",start)
 			}
