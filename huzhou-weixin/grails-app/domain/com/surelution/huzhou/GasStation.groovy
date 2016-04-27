@@ -22,7 +22,7 @@ class GasStation {
 	String tel
 	String linkMan
 	String linkManTel
-	
+	User user
 	/**
 	 * 是否可发卡
 	 */

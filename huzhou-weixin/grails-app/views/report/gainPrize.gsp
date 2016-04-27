@@ -2,7 +2,7 @@
 <%@page import="com.surelution.whistle.push.UserInfo"%>
 <html>
 	<head>
-		<title>获奖报表</title>
+		<title>中奖报表</title>
 		<meta name="layout" content="jarvis" />
 		<link rel="stylesheet" href="${resource(file:'css/bootstrap.min.css') }"/>
 		<script type="text/javascript" src="${resource(file:'js/bootstrap.min.js') }"></script>
@@ -17,13 +17,13 @@
 		<div class="content-wrapper">
 			<div class="container">
 				<div class="box box-info">
-					<h3>&nbsp;&nbsp;&nbsp;获奖情况报表</h3>
+					<h3>&nbsp;&nbsp;&nbsp;中奖报表</h3>
 					<form action="gainPrize">
 						<table class="table-seek">
 							<tr>
-								<td width="200" style="font-size:16px;" ><b>获奖时间&nbsp;&nbsp;&nbsp;</b></td>
+								<td width="200" style="font-size:16px;" ><b>中奖时间&nbsp;&nbsp;&nbsp;</b></td>
 								<td width="250">
-									<input type="text" class="form-control" id="startAt" name="startAt"/>
+									<input type="text" class="form-control" id="startAt" name="startAt" value="${params?.startAt }"/>
 											<script type="text/javascript">
 												$('#startAt').datetimepicker({
 													isRTL:false,
@@ -36,7 +36,7 @@
 								</td>
 								<td width="20">~&nbsp;&nbsp;</td>
 								<td width="250">
-									<input type="text" class="form-control" id="endAt" name="endAt"/>
+									<input type="text" class="form-control" id="endAt" name="endAt" value="${params?.endAt }"/>
 									<script type="text/javascript">
 										$('#endAt').datetimepicker({
 											isRTL:false,
@@ -58,10 +58,10 @@
 						<thead>
 							<tr>
 								<td>序列</td>
-								<td>奖品</td>
-								<td>获奖人微信昵称</td>
-								<td>获奖时间</td>
-								<td>获奖码</td>
+								<td><g:message code="prize.name.label" default="Name"/></td>
+								<td><g:message code="index.nikename.label" default="Nikename"/></td>
+								<td><g:message code="index.drawingAt.label" default="Drawing At"/></td>
+								<td><g:message code="index.winningSn.label" default="Winning Sn"/></td>
 								<td>是否已兑换</td>
 							</tr>
 						</thead>
@@ -71,9 +71,12 @@
 								<td>${i+1 }</td>
 								<td>${isGain?.prize?.name }</td>
 								<td>${UserInfo.loadUserInfo(isGain?.subscriber?.openId).nickname }</td>
-								<td>${isGain?.dateCreated }</td>
+								<td><g:formatDate date="${isGain?.drawingAt }" format="yyyy-MM-dd HH:mm"/></td>
 								<td>${isGain?.winningSn }</td>
-								<td>${isGain?.rewarded }</td>
+								<td>
+									<g:if test="${isGain?.rewarded }">是</g:if>
+									<g:else>否</g:else>
+								</td>
 							</tr>
 							</g:each>
 						</tbody>

@@ -1,7 +1,9 @@
 package com.surelution.huzhou
 
 class ReportController {
-
+	
+	def springSecurityService
+	
     def index() { }
 	
 	/**
@@ -25,10 +27,10 @@ class ReportController {
 			createAlias("prize", "p") 
 			eq("p.valuable", true)
 			if(start){
-				ge("drawAt",start)
+				ge("drawingAt",start)
 			}
 			if(end){
-				le("drawAt",end)
+				le("drawingAt",end)
 			}
 		}
 		
@@ -36,10 +38,10 @@ class ReportController {
 			createAlias("prize", "p")
 			eq ("p.valuable", true)
 			if(start){
-				ge("drawAt",start)
+				ge("drawingAt",start)
 			}
 			if(end){
-				le("drawAt",end)
+				le("drawingAt",end)
 			}
 		}.size()
 		
@@ -65,11 +67,13 @@ class ReportController {
 			createAlias("prize", "p")
 			eq("p.valuable", true)
 			eq("rewarded",true)
+			eq("user",springSecurityService.currentUser)
+			
 			if(start){
-				ge("drawAt",start)
+				ge("rewaredAt",start)
 			}
 			if(end){
-				le("drawAt",end)
+				le("rewaredAt",end)
 			}
 		}
 		
@@ -77,14 +81,35 @@ class ReportController {
 			createAlias("prize", "p")
 			eq ("p.valuable", true)
 			eq("rewarded",true)
+			eq("user",springSecurityService.currentUser)
 			if(start){
-				ge("drawAt",start)
+				ge("rewaredAt",start)
 			}
 			if(end){
-				le("drawAt",end)
+				le("rewaredAt",end)
 			}
 		}.size()
 		
 		[isGainPrize:isGainPrize,DrawingTicketTotal:DrawingTicketTotal]
+	}
+	
+	def scanningQr(){
+		println params.startAt
+		println params.endAt
+		def startAt = params.startAt ? params.date("startAt","yyyy-MM-dd") : new Date(116,3,20)
+		def endAt = params.endAt ? params.date("endAt","yyyy-MM-dd") : new Date(116,5,1)
+		println startAt
+		println endAt
+		
+		def gasStation = TempQrEvent2016EarlySummber.createCriteria().list {
+			between("scannedAt", startAt, endAt)
+			projections {
+				groupProperty('assignTo')
+				count("scannedBy")
+			 }
+			order("assignTo","desc")
+		}
+		println gasStation
+		[gasStation:gasStation,startAt:startAt,endAt:endAt]
 	}
 }

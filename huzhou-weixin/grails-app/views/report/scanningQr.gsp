@@ -1,8 +1,7 @@
 <!doctype html>
-<%@page import="com.surelution.whistle.push.UserInfo"%>
 <html>
 	<head>
-		<title>兑奖报表</title>
+		<title>中奖报表</title>
 		<meta name="layout" content="jarvis" />
 		<link rel="stylesheet" href="${resource(file:'css/bootstrap.min.css') }"/>
 		<script type="text/javascript" src="${resource(file:'js/bootstrap.min.js') }"></script>
@@ -17,11 +16,11 @@
 		<div class="content-wrapper">
 			<div class="container">
 				<div class="box box-info">
-					<h3>&nbsp;&nbsp;&nbsp;兑奖报表</h3>
-					<form action="exchangePrize">
+					<br/>
+					<form action="scanningQr">
 						<table class="table-seek">
 							<tr>
-								<td width="200" style="font-size:16px;" ><b>兑奖时间&nbsp;&nbsp;&nbsp;</b></td>
+								<td width="200" style="font-size:16px;" ><b>时间&nbsp;&nbsp;&nbsp;</b></td>
 								<td width="250">
 									<input type="text" class="form-control" id="startAt" name="startAt"/>
 											<script type="text/javascript">
@@ -54,35 +53,33 @@
 							</tr>
 						</table>
 					</form>
+					<br/>
 					<table class="table table-bordered table-respose">
 						<thead>
 							<tr>
-								<td>序列</td>
-								<td><g:message code="prize.name.label" default="Name"/></td>
-								<td><g:message code="index.nikename.label" default="Nikename"/></td>
-								<td><g:message code="index.drawingAt.label" default="Drawing At"/></td>
-								<td><g:message code="index.winningSn.label" default="Winning Sn"/></td>
-								<td>操作员</td>
-								<td>兑奖日期</td>
+								<th>时间</th>
+								<th>渠道</th>
+								<th>数量</th>
 							</tr>
 						</thead>
 						<tbody>
-							<g:each in="${isGainPrize }" status="i" var="isGain">
+							<g:each in="${gasStation }" status="i" var="gs">
+							<g:if test="${gs[0]}">
 							<tr>
-								<td>${i+1 }</td>
-								<td>${isGain?.prize?.name }</td>
-								<td>${UserInfo.loadUserInfo(isGain?.subscriber?.openId).nickname }</td>
-								<td><g:formatDate date="${isGain?.drawingAt }" format="yyyy-MM-dd HH:mm"/></td>
-								<td>${isGain?.winningSn }</td>
-								<td>${isGain?.user?.username }</td>
-								<td><g:formatDate date="${isGain?.rewaredAt }" format="yyyy-MM-dd HH:mm"/></td>
+								<td>
+									<g:formatDate date="${startAt }" format="yyyy-MM-dd"/>
+									~
+									<g:formatDate date="${endAt }" format="yyyy-MM-dd"/>
+								</td>
+								<td>${gs[0]?.name }</td>
+								<td>${gs[1] }</td>
 							</tr>
+							</g:if>
 							</g:each>
 						</tbody>
 					</table>
-					<br />
 					<div class="pagination">
-						<g:paginate total="${DrawingTicketTotal}" params="${params }" />
+						<g:paginate total="${1}"  />
 					</div>
 				</div>
 			</div>	

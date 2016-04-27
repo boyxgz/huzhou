@@ -67,8 +67,17 @@
 		</header>
 		
 		<aside class="main-sidebar">			
-			<section class="sidebar">				
+			<section class="sidebar">	
+			<sec:ifAnyGranted roles="ROLE_ADMIN">	
 				<ul class="sidebar-menu">
+				<!-- 报表导航链接开始 -->
+				
+					<li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i>
+							<span>兑奖</span> <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="convert" action="index">兑奖</g:link></li>
+						</ul></li>
+					<!-- 报表导航链接结束 -->
 					<!-- 报表导航链接开始 -->
 					<li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i>
 							<span>中奖报表</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -90,12 +99,28 @@
 					<li class="treeview"><a href="#"><i class="fa  fa-edit"></i>
 							<span>系统</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="setRate" action="index">中奖率设置</g:link></li>
+							<%--<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="setRate" action="index">中奖率设置</g:link></li>--%>
 							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="Prize2016EarlySummber" action="list">奖项设置</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="keyedMessage" action="list">关键字设置</g:link></li>
 						</ul></li>
 					<!-- 系统设置导航链接结束 -->
 					
 				</ul>
+				</sec:ifAnyGranted>
+				<sec:ifAnyGranted roles="ROLE_CLERK">
+				<ul class="sidebar-menu">
+					<li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i>
+						<span>兑奖</span> <i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="convert" action="index">兑奖</g:link></li>
+					</ul></li>
+					<li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i>
+						<span>中奖报表</span> <i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="exchangePrize">兑奖报表</g:link></li>
+					</ul></li>
+				</ul>
+				</sec:ifAnyGranted>
 				<!-- /.sidebar-menu -->
 			</section>
 			<!-- /.sidebar -->

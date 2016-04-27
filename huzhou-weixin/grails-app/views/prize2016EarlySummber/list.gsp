@@ -9,7 +9,7 @@
 		<style>
 			.box{ margin-top:35px;}
 			.table{width:96%; margin-left:2%;}
-			.modalstyle{ width: 40%; background-color:#F5F5F5; filter:alpha(opacity=50); margin-left:30%; height:45%; margin-top:5%; border-radius:5px;}
+			.modalstyle{ width: 40%; background-color:#F5F5F5; filter:alpha(opacity=50); margin-left:30%; height:83%; margin-top:5%; border-radius:5px;}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function(){
