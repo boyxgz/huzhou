@@ -80,10 +80,11 @@
 					<!-- 报表导航链接结束 -->
 					<!-- 报表导航链接开始 -->
 					<li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i>
-							<span>中奖报表</span> <i class="fa fa-angle-left pull-right"></i></a>
+							<span>报表</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
 							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">中奖报表</g:link></li>
 							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="exchangePrize">兑奖报表</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="scanningQr">二维码报表</g:link></li>
 						</ul></li>
 					<!-- 报表导航链接结束 -->
 					

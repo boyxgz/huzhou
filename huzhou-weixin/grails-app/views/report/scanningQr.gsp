@@ -57,9 +57,9 @@
 					<table class="table table-bordered table-respose">
 						<thead>
 							<tr>
-								<th>时间</th>
-								<th>渠道</th>
-								<th>数量</th>
+								<th>时间段</th>
+								<th>加油站</th>
+								<th>二维码扫描数量</th>
 							</tr>
 						</thead>
 						<tbody>
