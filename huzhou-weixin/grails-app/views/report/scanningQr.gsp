@@ -64,7 +64,6 @@
 						</thead>
 						<tbody>
 							<g:each in="${gasStation }" status="i" var="gs">
-							<g:if test="${gs[0]}">
 							<tr>
 								<td>
 									<g:formatDate date="${startAt }" format="yyyy-MM-dd"/>
@@ -74,7 +73,6 @@
 								<td>${gs[0]?.name }</td>
 								<td>${gs[1] }</td>
 							</tr>
-							</g:if>
 							</g:each>
 						</tbody>
 					</table>
