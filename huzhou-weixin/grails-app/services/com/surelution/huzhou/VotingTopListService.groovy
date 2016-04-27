@@ -7,50 +7,69 @@ package com.surelution.huzhou
  */
 class VotingTopListService {
 
+	/**
+	 * 最近一次更新排名列表时间
+	 */
     private long lastUpdate
-	
+
+	/**
+	 * 排名列表更新周期
+	 */
 	private long updatePerid = 3600 // 10 minutes
-	
-	private List<Integer> votingCounts
-	
-	private synchronized void updateList() {
-		def vCri = Resposing2016EarlySummberEvent.createCriteria()
-		println vCri
-		println "vCri"
-		def c = vCri.list {
-			projections {
-				groupProperty('calling')
-				sum("subscriber", "sub")
-//				countDistinct("voterOpenId", "vc")
-			 }
-			order("sub","desc")
-		}
-		println c
-		println "C"
-		votingCounts = c.collect() {
-			it[1]
-		}
-		println votingCounts
-		println "votingCounts"
-		lastUpdate = System.currentTimeMillis()
-	}
-	
-	def int topAt(int value) {
-		println value
-		println "value"
+
+	/**
+	 * 排名列表 votingCounts
+	 */
+	private List<Integer> vcs
+
+	/**
+	 * 更新排名列表
+	 */
+	private synchronized List<Integer> getVotingCounts() {
 		if(System.currentTimeMillis() - lastUpdate > updatePerid) {
-			updateList()
+			def vCri = Resposing2016EarlySummberEvent.createCriteria()
+			def c = vCri.list {
+				projections {
+					groupProperty('calling')
+					sum("subscriber", "sub")
+				 }
+				order("sub","desc")
+			}
+			vcs = c.collect() {
+				it[1]
+			}
+			lastUpdate = System.currentTimeMillis()
 		}
-		println votingCounts
+		return vcs
+	}
+
+	/**
+	 * 
+	 * @param 助力数
+	 * @return 排名
+	 */
+	def int topAt(int votes) {
 		int position = 0
-		for(int i : votingCounts) {
-			if(i < value) {
-				position
+		for(int i : getVotingCounts()) {
+			if(i < votes) {
 				break;
 			}
 			position++
 		}
-		println position
 		return position
+	}
+
+	/**
+	 * 
+	 * @param 排名
+	 * @return 助力数
+	 */
+	def int howManyVotes(int topAt) {
+		def votes = 0
+		def vcs = getVotingCounts()
+		if(vcs?.size() >= topAt) {
+			votes = vcs[topAt]
+		}
+		return votes
 	}
 }
