@@ -51,7 +51,7 @@ class VotingTopListService {
 	def int topAt(int votes) {
 		int position = 1
 		for(int i : getVotingCounts()) {
-			if(i < votes) {
+			if(i <= votes) {
 				break;
 			}
 			position++
