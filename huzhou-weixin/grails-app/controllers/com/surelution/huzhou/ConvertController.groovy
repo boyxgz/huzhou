@@ -19,9 +19,8 @@ class ConvertController {
 	}
 	
 	def verifyWinningSn(){
-		def ticketJson = []
+		def ticketJson
 		def ticket = DrawingTicket2016EarlySummber.findByWinningSn(params.winningSn)
-		println ticket
 		if(!ticket){
 			ticketJson = [message:KeyedMessage.findByKey("WinningSn-Null").message]
 		}else if(ticket){
@@ -37,7 +36,6 @@ class ConvertController {
 					id :ticket?.id,
 				]
 		}
-		println ticketJson as JSON
 		render ticketJson as JSON
 		
 	}
