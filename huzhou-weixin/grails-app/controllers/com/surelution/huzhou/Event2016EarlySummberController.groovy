@@ -31,7 +31,6 @@ class Event2016EarlySummberController {
 	 * 自动登录
 	 */
 	def beforeInterceptor = {
-		
 		def userSn = request.getCookie('subscriber-sn')
 //		subscriber = Subscriber.get(2)
 		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
@@ -52,7 +51,11 @@ class Event2016EarlySummberController {
 	 */
     def calling(Long id) {
 		def beneficiary = Subscriber.get(id)
-		[beneficiary:beneficiary]
+		def c = Calling2016EarlySummberEvent.findOrSaveBySubscriber(beneficiary)
+		
+		//是否已经为这名用户助力过
+		def supported = Resposing2016EarlySummberEvent.findByCallingAndSubscriber(c, subscriber) != null
+		[beneficiary:beneficiary, supported:supported]
 	}
 
 	/**
@@ -79,7 +82,8 @@ class Event2016EarlySummberController {
 			flash.message = KeyedMessage.findByKey("There-are").message
 				.replace("##",UserInfo.loadUserInfo(beneficiary.openId).nickname)
 		}
-		[beneficiary:beneficiary]
+		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
+		[beneficiary:beneficiary, url:dest]
 	}
 
 	/**
@@ -95,8 +99,6 @@ class Event2016EarlySummberController {
 			isDrawingSub.save(flush:true)
 		}
 		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
-//		def url = Auth2Util.buildRedirectUrl(dest, subscriber.openId, Auth2Util.AuthScope.BASE)
-		println dest
 		[isDrawingSub:isDrawingSub,url:dest]
 	}
 	
@@ -134,7 +136,6 @@ class Event2016EarlySummberController {
 		}
 		
 		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
-		println ticket.pointerAt
 		[url:dest,lastDrawingDate:lastDrawingDate,isToday:isToday,ticketNum:ticketNum, ticket:ticket]
 	}
 	
@@ -147,7 +148,6 @@ class Event2016EarlySummberController {
 //		drawing?.drawingAt = new Date()
 //		drawing.save(flush:true)
 		drawPrizeService.draw(drawing)
-		println drawing
 		def a = [abc:drawing.pointerAt, wardSn:drawing.wellLookSn]
 		render a as JSON
 	}
@@ -173,18 +173,6 @@ class Event2016EarlySummberController {
 		def	fistAt = votingTopListService.howManyVotes(1)
 		def lastAt = votingTopListService.howManyVotes(20)
 		def dest = "${Holders.config.grails.serverURL}/event2016EarlySummber/calling/${subscriber.id}"
-		println dest
 		[drawingTicket:ticket,resposingNum:resposingNum,topAt:topAt,url:dest,fistAt:fistAt,lastAt:lastAt]
-	}
-	
-	def onMenuShareSuccess(Long id){
-		def callingShare = Calling2016EarlySummberEvent.findBySubscriber(subscriber)
-		if(!callingShare){
-			callingShare = new Calling2016EarlySummberEvent()
-			callingShare.subscriber = subscriber
-			callingShare.dateCreated = new Date()
-			callingShare.save(flush:true)
-		}	
-		redirect(action:'drawing', id:id)
 	}
 }

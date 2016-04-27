@@ -22,7 +22,6 @@ class TempQrScannedAction extends HuzhouBaseAction {
 				}
 			}
 		}
-		println qrKey
 		if(qrKey) {
 			code = TempQrCode.findByQrKey(qrKey)
 		}
@@ -36,29 +35,6 @@ class TempQrScannedAction extends HuzhouBaseAction {
 			put(attr)
 		else
 			keepSilence()
-//		if(getParam("Event") == "subscribe"){
-//			def drawSub = DrawingTicketSubscribing2016EarlySummber.findBySubscriber(subscriber)
-//			if(!drawSub){
-//				put(new Attribute(Attribute.KEY_Content,"关注获得抽奖机会一次"))
-//				drawSub = new DrawingTicketSubscribing2016EarlySummber()
-//				drawSub.subscriber = subscriber
-//				drawSub.dateCreated = new Date()
-//				//此处分配奖品
-//				drawSub.prize = Prize2016EarlySummber.findByValuable(false)
-//				if(drawSub.prize.valuable == false){
-//					drawSub.winningSn = null
-//				}
-//				drawSub.save(flush:true)
-//			}
-//		}else if(getParam("Event") == "SCAN"){
-//			def drawScn = new DrawingTicketScanningQr2016EarlySummber()
-//			drawScn.subscriber = subscriber
-//			drawScn.dateCreated = new Date()
-//			drawScn.prize = Prize2016EarlySummber.findByValuable(false)
-//			if(drawScn.prize.valuable == false){
-//				drawScn.winningSn = null
-//			}
-//		}
 	}
 
 }

@@ -1,0 +1,70 @@
+@charset='utf-8';
+body,html{ padding:0; margin:0; font-size:12px; color:#666; font-family:'微软雅黑';}
+.index_bg{ background: url(../images/bg.png) repeat;}
+.fenxiang_bg{ background: #dee7e6; }
+.zhu_bg{ background: #fdecd2; }
+ul,li,p,h1,h2,h3,dl,dt,dd,input{ padding:0; margin:0; list-style:none;}
+img{vertical-align: top; border: none;}
+.center{position: relative; top: 50%; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%); transform: translateY(-50%);}
+@media screen and (max-device-width: 320px) 
+{
+.zhu_txt{transform: scale(0.80);zoom:0.80; }
+.zhu_list_title{transform: scale(0.80);zoom:0.80; }
+.zl_pm_txt{transform: scale(0.80);zoom:0.80; }
+ } 
+
+.head{ width: 100%; height: 290px; text-align: center; }
+.head img{ max-width: 70%; }
+.head_txt{ width: 90%; height: auto; margin: 0 auto; line-height: 36px; color: #dee7e6; font-size: 1.45em; text-align: center;}
+.head_txt span{ color: #dc0000;}
+.code_img{ max-width: 60%; display: block; margin: 20px auto; box-shadow: 0 3px 10px 0px #000;}
+
+.fenxiang_img{ max-width: 100%; display: block; margin: 0 auto; }
+.fenxiang_txt{ width: 80%; height:  auto; background: #fff; border-radius: 5px; padding: 25px 5%; margin: 0 auto; font-size: 1.45em;}
+.fenxiang_txt span{ color: #df0000; }
+.zhuli{ width: 190px; height: 83px; border-radius: 3px; background: url(../images/zhuli_bg.jpg) repeat; margin: 53px auto 0 auto; border:none; display:block; font-size: 1.45em; font-weight: bold; color: #fff; font-family: '微软雅黑'; cursor: pointer;}
+.zhulihui{ width: 190px; height: 83px; border-radius: 3px; background: url(../images/zhuli_bg_hui.jpg) repeat; margin: 53px auto 0 auto; border:none; display:block; font-size: 1.45em; font-weight: bold; color: #fff; font-family: '微软雅黑'; cursor: pointer;}
+.zhuli_bot{ width: 90%; height: auto; padding: 15px 5%; text-align: center; background: #1b1c21; color: #fff; font-size: 1.25em; margin-top: 60px;}
+
+.zl_txt{ width: 90%; height: auto; padding: 35px 0; text-align: center; margin: 0 auto; color: #333333; font-size: 1.45em; font-weight: bold;}
+.zl_txt span{ color: #d60000; }
+
+.zl_pm{ width: 80%; height: auto; padding: 15px 5%; margin: 0 auto; background: #fff; border-radius: 5px;}
+.zl_pm .zl_pm_tit{ width: 100%; height: 75px; line-height: 75px; font-weight: bold; text-align: center; font-size: 1.25em; }
+.zl_pm .zl_pm_tit span{ font-size: 1.55em; color: #d60000; }
+
+.pm_list{ display: block; width: 90%; height: auto; margin: 0 auto; border-top: solid 1px #eee;}
+.pm_list li{ display: block; width: 100%; height: 48px; line-height:48px; border-bottom: 1px #eee solid; font-size: 1.25em; font-weight: bold;}
+.pm_list li em{ color: #444; font-style: normal; }
+.pm_list li span{ color: #d60000; }
+
+.pm_list1{ display: block; width: 90%; height: auto; margin: 0 auto; border-top: solid 1px #eee; line-height: 25px; padding: 10px 0; border-bottom: solid 1px #eee;}
+
+.zl_pm_txt{ width: 90%; padding: 15px 0; text-align: center; min-height: 41px; margin: 0 auto; font-size: 1.05em; color: #d60000; font-weight: bold;}
+.zl_pm_txt span{ font-size: 1.45em; }
+
+.zl_pm1{ width: 80%; height: auto; padding: 15px 5%; margin: 20px auto; background: #fff; border-radius: 5px;}
+.zl_pm1 table { text-align: center;}
+.zl_pm1 table tr:first-child{ width: 100%; height: 35px; line-height: 35px;}
+.zl_pm1 table tr:first-child td{ border-bottom: solid 1px #ccc; height: 35px; font-weight: bold; font-size: 1.25em; color: #444; }
+.zl_pm1 table tr:first-child td:first-child{ color: #444; }
+.zl_pm1 table tr td{ border-bottom: solid 1px #eee; height: 35px; }
+.zl_pm1 table tr td:first-child{ color: #d60000; }
+.zl_pm1 table tr td span{ color: #d60000; }
+.zl_pm1 table tr td a{ display: block; width: 60px; height: 26px; border-radius: 5px; color: #fff; background: #d60000; line-height: 26px; text-align: center; margin: 0 auto; text-decoration: none; }
+
+.zhu_title{ width: 100%; max-width: 1080px; margin: 0 auto; height: auto; }
+.zhu_title img{ max-width: 100%; }
+.zhu_text{ width: 100%; height: auto; max-width: 1080px; margin: 0 auto; position: relative;}
+.zhu_text img{ max-width: 100%; }
+.zhu_txt{ width: 60%; height: auto; position: absolute; left: 20%; top: 0;text-align: center; color: #edd8d7; font-weight: bold; font-size: 1.55em;}
+
+.zhu_list{ max-width: 1020px; width: 94.41%; height:auto; padding: 20px 0; margin: 0 auto; background: #da3932; border-radius: 0 0 30px 30px;}
+.zhu_list .zhu_list_title{ width: 100%; height: 35px; line-height: 35px; text-align: center; color: #edd8d7; font-weight: bold; font-size: 1.55em;}
+.zhu_list table{ width: 90%; height: auto; margin: 0 auto; text-align: center; border-top: solid 1px #e1615b; border-left: solid 1px #e1615b;}
+.zhu_list table tr td{ border-right: solid 1px #e1615b; border-bottom: solid 1px #e1615b;}
+.zhu_list table tr:first-child td{ height: 45px; color: #fff; font-weight: bold; }
+.zhu_list table tr td{ height: 35px; line-height: 35px; color: #fff; }
+.zhu_list_bott{ width: 90%; min-height: 35px; padding: 10px 0; text-align: center; color: #edd8d7; margin: 0 auto; font-size: 1.25em;}
+
+.zhuli_bot1{ width: 90%; height: auto; padding: 15px 5%; text-align: left; background: #1b1c21; color: #fff; font-size: 1.25em; margin-top: 30px;}
