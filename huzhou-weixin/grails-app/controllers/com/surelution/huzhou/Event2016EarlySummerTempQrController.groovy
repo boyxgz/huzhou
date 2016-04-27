@@ -3,6 +3,7 @@ package com.surelution.huzhou
 import grails.util.Holders;
 import groovy.time.TimeCategory;
 
+import com.surelution.huzhou.utils.CardGenerator;
 import com.surelution.whistle.push.qrcode.QrCode
 
 class Event2016EarlySummerTempQrController {
@@ -10,6 +11,7 @@ class Event2016EarlySummerTempQrController {
 	private static int A_MONTH_SECOND = 30 * 24 * 60 * 60
 
     def index() {
+		def start = System.currentTimeMillis()
 		def amount = params.int('amount')
 		if(!amount) {
 			amount = 0
@@ -18,10 +20,12 @@ class Event2016EarlySummerTempQrController {
 			def qr = new TempQrEvent2016EarlySummber()
 			qr.save()
 		}
+		println System.currentTimeMillis() - start
 		render("${amount} Qr Code Created!")
 	}
 
 	def complete() {
+		def start = System.currentTimeMillis()
 		def qrs = TempQrEvent2016EarlySummber.findAllByContentIsNull()
 		qrs.each {qr->
 			def is = QrCode.getTempQr(qr.qrKey, A_MONTH_SECOND)
@@ -37,18 +41,21 @@ class Event2016EarlySummerTempQrController {
 			qr.content = content
 			qr.save()
 		}
-		render("${qrs.size()}")
+		
+		render("${qrs.size()} Use time: ${System.currentTimeMillis() - start}")
 	}
 	
 	def generateQr() {
+		def start = System.currentTimeMillis()
+		int from = 9996
 		def amount = params.int('amount')
 		if(!amount) {
-			amount = 10001
+			amount = 10005
 		}
 		for(int i = 0; i < amount / 6; i++) {
-			CardGenerator.compositePage(6 * i + 1, 6 * i + 7, i);
+			CardGenerator.compositePage(6 * i + 1 + from, 6 * i + 7 + from, i + (int)(from/6));
 		}
-		render("${(int)(amount / 6)}")
+		render("${(int)(amount / 6)} use time: ${System.currentTimeMillis() - start}")
 	}
 //	
 //	def test(){

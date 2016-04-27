@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.surelution.huzhou;
+package com.surelution.huzhou.utils;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,6 +12,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
+
+import com.surelution.huzhou.TempQrEvent2016EarlySummber;
 
 /**
  * @author <a href="mailto:guangzong.syu@gmail.com">guagnzong</a>

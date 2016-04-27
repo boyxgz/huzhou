@@ -24,7 +24,13 @@ class TempQrEvent2016EarlySummber extends TempQrCode {
 			return new Attribute(Attribute.KEY_Content, KeyedMessage.findByKey("EVENT-2016-EARLY-SUMMER-QR-SCANNED-DUPLICATED")?.message)
 		}
 		def firstSightToday = new Date().clearTime()
-		def todayScanned = TempQrEvent2016EarlySummber.countByScannedByAndScannedAtGreaterThan(subscriber, firstSightToday)
+		def todayScanned = TempQrEvent2016EarlySummber.createCriteria().get() {
+			projections {
+				count('id')
+			}
+			eq('scannedBy', subscriber)
+			ge('scannedAt', firstSightToday)
+		}
 		if(todayScanned < 1) { //合法的扫描
 			scannedAt = new Date()
 			scannedBy = subscriber
