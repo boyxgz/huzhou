@@ -22,7 +22,7 @@ class AutoLoginController {
 		
 		def sc = SubscriberCookie.populate(subscriber)
 		response.setCookie('subscriber-sn', sc.subscriberSn)
-		redirect(url:"http://${Holders.config.grails.serverURL}${state}")
+		redirect(url:"${Holders.config.grails.serverURL}${state}")
 	}
 	
 }
