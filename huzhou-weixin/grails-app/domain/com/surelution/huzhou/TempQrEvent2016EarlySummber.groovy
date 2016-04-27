@@ -40,6 +40,7 @@ class TempQrEvent2016EarlySummber extends TempQrCode {
 			ticket.qrCode = this
 			ticket.subscriber = subscriber
 			ticket.save(flush:true)
+			println ticket.save(flush:true)
 
 			def attr = new NewsAttribute()
 			attr.add(KeyedMessage.findByKey("EVENT-2016-EARLY-SUMMER-QR-SCANNED-TITLE")?.message, 

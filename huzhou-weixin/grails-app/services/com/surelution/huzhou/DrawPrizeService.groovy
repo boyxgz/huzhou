@@ -23,14 +23,20 @@ class DrawPrizeService {
 			firstSigntNextDay = firstSigntNextDay + 1.day
 		}
 
-		def batches = Prize2016EarlySummber.listOrderByIndex
+		def batches = Prize2016EarlySummber.listOrderByIndex()
 		def sn = ticket.id
 		def prize
 		batches.each {batch->
 			def luckyNum = batch.luckyNum
 			String[] _nums = luckyNum.split(",")
-			def nums = _nums.collect() {n->
-				n as int
+			
+			def nums = []
+			_nums.each() {n->
+				try{
+					int i = Integer.valueOf(n)
+					nums.add(i)
+				}catch (NumberFormatException e) {
+				}
 			}
 			int factor = (sn -lastDay) % maxPlayer
 			if(nums.contains(factor)) {

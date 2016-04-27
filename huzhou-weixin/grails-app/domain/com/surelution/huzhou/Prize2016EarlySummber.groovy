@@ -6,7 +6,6 @@ class Prize2016EarlySummber {
 
     static constraints = {
 		description nullable:true
-		index nullable:true
     }
 	static mapping = {
 		index column:'_index'
