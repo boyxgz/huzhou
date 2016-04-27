@@ -67,7 +67,7 @@ class VotingTopListService {
 	def int howManyVotes(int topAt) {
 		def votes = 0
 		def vcs = getVotingCounts()
-		if(vcs?.size() >= topAt - 1) {
+		if(vcs?.size() > topAt - 1) {
 			votes = vcs[topAt - 1]
 		}
 		return votes
