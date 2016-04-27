@@ -27,7 +27,7 @@ class Prize2016EarlySummberController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'prize2016EarlySummber.label', default: 'Prize2016EarlySummber'), prize2016EarlySummberInstance.id])
-        redirect(action: "show", id: prize2016EarlySummberInstance.id)
+        redirect(action: "list", id: prize2016EarlySummberInstance.id)
     }
 
     def show(Long id) {
