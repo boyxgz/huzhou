@@ -33,8 +33,8 @@ class Event2016EarlySummberController {
 	def beforeInterceptor = {
 		
 		def userSn = request.getCookie('subscriber-sn')
-		subscriber = Subscriber.get(2)
-//		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
+//		subscriber = Subscriber.get(2)
+		subscriber = SubscriberCookie.findBySubscriberSn(userSn)?.subscriber
 		if(!subscriber) {
 			def requestUrl = request.forwardURI
 			def baseUrl = Holders.config.grails.serverURL
@@ -95,9 +95,9 @@ class Event2016EarlySummberController {
 			isDrawingSub.save(flush:true)
 		}
 		def dest = "${Holders.config.grails.serverURL}/Event2016EarlySummber/calling/${subscriber.id}"
-		def url = Auth2Util.buildRedirectUrl(dest, subscriber.openId, Auth2Util.AuthScope.BASE)
-		
-		[isDrawingSub:isDrawingSub,url:url]
+//		def url = Auth2Util.buildRedirectUrl(dest, subscriber.openId, Auth2Util.AuthScope.BASE)
+		println dest
+		[isDrawingSub:isDrawingSub,url:dest]
 	}
 	
 	/**
@@ -169,9 +169,11 @@ class Event2016EarlySummberController {
 		 * 排名数
 		 */
 		def topAt = votingTopListService.topAt(resposingNum)
+		def	fistAt = votingTopListService.howManyVotes(1)
+		def lastAt = votingTopListService.howManyVotes(20)
 		def dest = "${Holders.config.grails.serverURL}/event2016EarlySummber/calling/${subscriber.id}"
 		println dest
-		[drawingTicket:ticket,resposingNum:resposingNum,topAt:topAt,url:dest]
+		[drawingTicket:ticket,resposingNum:resposingNum,topAt:topAt,url:dest,fistAt:fistAt,lastAt:lastAt]
 	}
 	
 	def onMenuShareSuccess(Long id){

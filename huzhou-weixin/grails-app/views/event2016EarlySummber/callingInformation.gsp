@@ -53,8 +53,8 @@
 					<p>${KeyedMessage.findByKey("Ranking-Zero").message }</p>
 				</g:else>
 				<p>${KeyedMessage.findByKey("Ranking").message.replace("##", topAt.toString()) }</p>
-				<p>${KeyedMessage.findByKey("Ranking-First").message.replace("##", "1") }</p>
-				<p>${KeyedMessage.findByKey("Ranking-Last").message.replace("##", "1") }</p>
+				<p>${KeyedMessage.findByKey("Ranking-First").message.replace("##", fistAt.toString()) }</p>
+				<p>${KeyedMessage.findByKey("Ranking-Last").message.replace("##", lastAt.toString()) }</p>
 				<p style="color:red;">${KeyedMessage.findByKey("Push-Message").message }</p>
 			</div>
 			<table class="table table-bordered table-respose" >

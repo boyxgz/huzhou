@@ -31,7 +31,7 @@ class VotingTopListService {
 			def c = vCri.list {
 				projections {
 					groupProperty('calling')
-					sum("subscriber", "sub")
+					count("subscriber", "sub")
 				 }
 				order("sub","desc")
 			}
@@ -49,9 +49,9 @@ class VotingTopListService {
 	 * @return 排名
 	 */
 	def int topAt(int votes) {
-		int position = 0
+		int position = 1
 		for(int i : getVotingCounts()) {
-			if(i < votes) {
+			if(i <= votes) {
 				break;
 			}
 			position++
@@ -67,8 +67,8 @@ class VotingTopListService {
 	def int howManyVotes(int topAt) {
 		def votes = 0
 		def vcs = getVotingCounts()
-		if(vcs?.size() >= topAt) {
-			votes = vcs[topAt]
+		if(vcs?.size() >= topAt - 1) {
+			votes = vcs[topAt - 1]
 		}
 		return votes
 	}
