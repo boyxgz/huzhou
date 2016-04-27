@@ -110,5 +110,18 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 '/**/js/**':                      ['permitAll'],
 '/**/css/**':                     ['permitAll'],
 '/**/images/**':                  ['permitAll'],
-'/**/favicon.ico':                ['permitAll']
+'/**/favicon.ico':                ['permitAll'],
+'/convert/index':				  ['ROLE_ADMIN','ROLE_CLERK'],
+'/report/exchangePrize':		  ['ROLE_ADMIN','ROLE_CLERK']
+]
+grails.plugin.springsecurity.interceptUrlMap = [
+	'/':                              ['ROLE_ADMIN','ROLE_CLERK'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll'],
+	'/convert/index':				  ['ROLE_ADMIN','ROLE_CLERK'],
+	'/report/exchangePrize':		  ['ROLE_ADMIN','ROLE_CLERK']
 ]
