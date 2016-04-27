@@ -15,9 +15,9 @@ environments {
         dataSource {
             driverClassName = "com.mysql.jdbc.Driver"
 		    username = "root"
-		    password = ""
+		    password = "123456"
             dbCreate = "update" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/huzhou_mp?useUnicode=true&characterEncoding=utf8"
+            url = "jdbc:mysql://localhost/hz-wx?useUnicode=true&characterEncoding=utf8"
 			loggingSql = true
 
 			validationQuery="SELECT 1"
