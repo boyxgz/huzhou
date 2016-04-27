@@ -23,11 +23,6 @@ class Event2016EarlySummberController {
 	def drawPrizeService
 	
 	/**
-	 * 分享页面的url
-	 */
-	
-	
-	/**
 	 * 自动登录
 	 */
 	def beforeInterceptor = {

@@ -65,7 +65,7 @@ environments {
     development {
         grails.logging.jul.usebridge = true
 		qrFile.path = "/Users/johnny/temp_qr"
-		grails.serverURL = "http://huzhou.sh-hansi.com"
+		grails.serverURL = "http://qiushengming.sh-hansi.com"
 		grails.dynImage.rootPath="/Users/johnny/huzhou_pic"
     }
     production {
