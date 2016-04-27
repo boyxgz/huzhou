@@ -15,17 +15,17 @@
 					url:url,
 					dataType : "json",
 					success : function(data){
-						$("nikeName").val(data.nikeName);
-						$("#name").val(data.name);
-						$("#amount").val(data.amount);
-						$("#description").val(data.description);
-						$("#drawingAt").val(data.drawingAt);
+						$("#nickName").html(data.nickname);
+						$("#name").html(data.name);
+						$("#amount").html(data.amount);
+						$("#description").html(data.description);
+						$("#drawingAt").html(data.drawingAt);
 						$("#ticket").val(data.id);
 						if(data.rewarded == true){
-							$("#rewarded").attr("checked",true)
+							$("#rewarded").html("是")
 							$("#confim").attr("disabled",true)
 						}else if(data.rewarded == false){
-							$("#rewarded").removeAttr("checked")
+							$("#rewarded").html("否")
 							$("#confim").removeAttr("disabled")
 						}
 						if(data.message != undefined){
@@ -64,7 +64,7 @@
 						<dt><g:message code="index.nikename.label" default="NikeName"/></dt>
 						<dd>
 							<div class="col-md-4">
-								<input type="text" class="form-control" id="nikeName" required="required" value="${UserInfo.loadUserInfo(ticket?.subscriber?.openId)?.nickname }"/>
+								<div id="nickName"></div>
 							</div>
 						</dd>
 					</dl>
@@ -72,7 +72,7 @@
 						<dt><g:message code="prize.name.label" default="Name"/></dt>
 						<dd>
 							<div class="col-md-4">
-								<input type="text" class="form-control" id="name" />
+							<div id="name"></div>
 							</div>
 						</dd>
 					</dl>
@@ -80,7 +80,7 @@
 						<dt><g:message code="prize.amount.label" default="Amount"/></dt>
 						<dd>
 							<div class="col-md-4">
-								<input type="text" class="form-control" id="amount" />
+							<div id="amount"></div>
 							</div>
 						</dd>
 					</dl>
@@ -88,7 +88,7 @@
 						<dt><g:message code="prize.description.label" default="Description"/></dt>
 						<dd>
 							<div class="col-md-4">
-								<input type="text" class="form-control" id="description" />
+							<div id="description"></div>
 							</div>
 						</dd>
 					</dl>
@@ -96,14 +96,14 @@
 						<dt><g:message code="index.drawingAt.label" default="Drawing At"/></dt>
 						<dd>
 							<div class="col-md-4">
-								<input type="text" class="form-control" id="drawingAt" />
+							<div id="drawingAt"></div>
 							</div>
 						</dd>
 					</dl>
 					<dl class="dl-horizontal">
 						<dt><g:message code="index.rewarded.label" default="rewarded"/></dt>
 						<dd><div class="col-md-4">
-							<input type="checkbox" id="rewarded"/>
+						<div id="rewarded"></div>
 						</div></dd>
 					</dl>
 					<input type="hidden" id="ticket" />
