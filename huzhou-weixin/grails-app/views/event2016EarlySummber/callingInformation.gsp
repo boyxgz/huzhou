@@ -75,7 +75,9 @@
 							<g:else>${(ticket?.prize)? ticket.prize.name:"神秘" }</g:else>
 						</td>
 						<td>
-							<g:if test="${ticket?.prize?.name != "谢谢惠顾" && ticket?.prize != null}"><span>${ticket?.winningSn }</span></g:if>
+							<g:if test="${ticket?.prize?.name != "谢谢惠顾" && ticket?.prize != null}">
+								<span>${ticket.rewarded?'<del>':'' }${ticket?.winningSn }${ticket.rewarded?'</del>':'' }</span>
+							</g:if>
 							<g:elseif test="${ ticket?.prize == null && ticket?.drawingAt == null}">
 								<g:link action="drawing" id="${ticket?.id }" class="btn btn-default">抽奖</g:link>
 							</g:elseif>
