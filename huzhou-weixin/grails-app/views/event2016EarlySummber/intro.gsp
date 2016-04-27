@@ -1,3 +1,4 @@
+<%@page import="grails.util.Holders"%>
 <%@page import="com.surelution.huzhou.KeyedMessage" %>
 <!doctype html>
 <html lang="zh-CN">

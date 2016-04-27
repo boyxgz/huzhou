@@ -15,7 +15,7 @@ class Counters {
 	}
 	
 	String key
-	Long value
+	Integer value
 
 	/**
 	 * 利用gorm的乐观锁，如果更新到数据库的时候，出错表示在次同时，这行记录被其他线程修改，
@@ -23,7 +23,7 @@ class Counters {
 	 * @param key
 	 * @return
 	 */
-	public static Long getNextValue(String key) throws CountersException {
+	public static Integer getNextValue(String key) throws CountersException {
 		int tryTimes = 0
 		while(tryTimes < 5) {
 			tryTimes++
@@ -35,7 +35,7 @@ class Counters {
 		throw new CountersException()
 	}
 
-	private static Long lo(String key) {
+	private static Integer lo(String key) {
 		def c = Counters.findByKey(key)
 		if(!c) {
 			c = new Counters()

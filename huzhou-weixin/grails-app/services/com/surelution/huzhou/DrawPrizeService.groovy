@@ -23,8 +23,11 @@ class DrawPrizeService {
 			firstSigntNextDay = firstSigntNextDay + 1.day
 		}
 
-		def batches = Prize2016EarlySummber.listOrderByIndex()
-		def sn = ticket.id
+		def batches = Prize2016EarlySummber.createCriteria().list() {
+			eq('valuable', true)
+			order('index')
+		}
+		def sn = Counters.getNextValue("EVENT-2016-EARLY-SUMMER-DRAW-SN")
 		def prize
 		batches.each {batch->
 			def luckyNum = batch.luckyNum
