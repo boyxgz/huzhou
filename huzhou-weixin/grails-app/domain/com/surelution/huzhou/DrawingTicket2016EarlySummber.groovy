@@ -20,6 +20,8 @@ class DrawingTicket2016EarlySummber {
 		winningSn unique:true
 		index nullabel:true
 		pointerAt nullable:true
+		user nullable:true
+		rewaredAt nullable:true
     }
 	
 	static mapping = {
@@ -53,6 +55,9 @@ class DrawingTicket2016EarlySummber {
 	
 	int index
 	
+	User user
+	
+	Date rewaredAt
 	String getWellLookSn() {
 		StringBuffer sb = new StringBuffer(winningSn)
 		sb.insert(3, "-")
