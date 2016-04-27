@@ -50,6 +50,8 @@
 						
 						<th>商品总量</th>
 						
+						<g:sortableColumn class="alink" property="positions" title="${message(code: 'prize2016EarlySummber.index.label', default: 'Positions')}" />
+						
 						<g:sortableColumn class="alink" property="positions" title="${message(code: 'prize2016EarlySummber.positions.label', default: 'Positions')}" />
 						
 						<td>操作</td>
@@ -65,6 +67,7 @@
 					
 						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "amount")}</td>
 						<td>${ prize2016EarlySummberInstance?.quantity}</td>
+						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "index")}</td>
 						<td>${fieldValue(bean: prize2016EarlySummberInstance, field: "positions")}</td>
 						
 						<td>

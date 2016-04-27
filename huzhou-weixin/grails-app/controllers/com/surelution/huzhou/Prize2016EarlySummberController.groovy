@@ -99,4 +99,18 @@ class Prize2016EarlySummberController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def a() {
+		def sb = new StringBuffer()
+		if(params.step && params.amount) {
+			int step = params.int('step')
+			int amount = params.int('amount')
+			def r = new Random()
+			for(int i = 0; i < amount; i++) {
+				int a = r.nextInt(step)
+				sb.append("${i*step+a},")
+			}
+		}
+		[line:sb.toString()]
+	}
 }
