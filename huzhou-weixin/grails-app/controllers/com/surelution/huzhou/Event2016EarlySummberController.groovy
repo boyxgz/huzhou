@@ -156,6 +156,7 @@ class Event2016EarlySummberController {
 	 * @return
 	 */
 	def callingInformation(){
+		DrawingTicketSubscribing2016EarlySummber.findOrSaveBySubscriber(subscriber)
 		def ticket = DrawingTicket2016EarlySummber.createCriteria().list{
 			eq("subscriber",subscriber)
 		}
