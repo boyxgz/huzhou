@@ -47,7 +47,10 @@ class Event2016EarlySummerTempQrController {
 	
 	def generateQr() {
 		def start = System.currentTimeMillis()
-		int from = 9996
+		int from = params.int('from')
+		if(!from) {
+			from = 9996
+		}
 		def amount = params.int('amount')
 		if(!amount) {
 			amount = 10005

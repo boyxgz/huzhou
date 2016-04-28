@@ -51,7 +51,8 @@
 <body class="fenxiang_bg">
 	<img src="${resource(file:'images/fenxiang.png')}" alt="" class="fenxiang_img">
 	<div class="fenxiang_txt">
-		${KeyedMessage.findByKey("Calling-Request")?.message?.replace("##",UserInfo.loadUserInfo(beneficiary?.openId).nickname) }
+	<g:set var="ui" value="${UserInfo.loadUserInfo(beneficiary?.openId) }"/>
+		${KeyedMessage.findByKey("Calling-Request")?.message?.replace("##",ui?ui.nickname:'') }
 	</div>
 	<g:if test="${supported }"><input type="button" class="zhulihui" onclick="alert('你已经为该好友助力过，不能重复助力')" value="已为该好友助力过" ></g:if>
 	<g:else><input type="button" class="zhuli" value="助力" onclick="zhuli()"></g:else>
