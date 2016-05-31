@@ -1,12 +1,10 @@
 package com.surelution.huzhou
 
+import grails.converters.JSON
 import grails.util.Holders
 
 import java.text.SimpleDateFormat
-import grails.converters.JSON
-import org.junit.After;
 
-import com.sun.jmx.snmp.Timestamp
 import com.surelution.whistle.core.Auth2Util
 import com.surelution.whistle.core.Auth2Util.AuthScope
 import com.surelution.whistle.push.UserInfo
@@ -62,12 +60,14 @@ class Event2016EarlySummberController {
 		def beneficiary = Subscriber.get(id)
 		def callingShare = Calling2016EarlySummberEvent.findOrSaveBySubscriber(beneficiary)
 		def resposing = Resposing2016EarlySummberEvent.findByCallingAndSubscriber(callingShare, subscriber)
-		if(resposing == null) {
-			supported = false
-			resposing = new Resposing2016EarlySummberEvent()
-			resposing.calling = callingShare
-			resposing.subscriber = subscriber
-			resposing.save(flush:true)
+		if(AppVar.findByKey("2016-early-summer-draw-prize-on")?.value == 1) {
+			if(resposing == null) {
+				supported = false
+				resposing = new Resposing2016EarlySummberEvent()
+				resposing.calling = callingShare
+				resposing.subscriber = subscriber
+				resposing.save(flush:true)
+			}
 		}
 		
 		/**

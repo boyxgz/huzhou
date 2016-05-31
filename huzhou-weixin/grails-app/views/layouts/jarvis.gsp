@@ -85,6 +85,7 @@
 							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="gainPrize">中奖报表</g:link></li>
 							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="exchangePrize">兑奖报表</g:link></li>
 							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="report" action="scanningQr">二维码报表</g:link></li>
+							<li><a href="" style="float:left;"><i class="fa fa-circle-thin"></i></a><g:link controller="event2016EarlySummberReport" action="gainPrize">助力排名</g:link></li>
 						</ul></li>
 					<!-- 报表导航链接结束 -->
 					
